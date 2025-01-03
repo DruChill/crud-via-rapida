@@ -1,11 +1,10 @@
 package com.viaRapida.viaRapidaProyect.model;
 
-import java.time.LocalDate;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import java.time.LocalDate;
 
 @Entity
 public class Ticket {
@@ -14,7 +13,6 @@ public class Ticket {
     private Long id;
     private String passengerName;
     private int numberOfPassengers;
-    private Long destinationId;
     private String fromLocation;
     private String toLocation;
     private LocalDate travelDate;
@@ -43,14 +41,6 @@ public class Ticket {
 
     public void setNumberOfPassengers(int numberOfPassengers) {
         this.numberOfPassengers = numberOfPassengers;
-    }
-
-    public Long getDestinationId() {
-        return destinationId;
-    }
-
-    public void setDestinationId(Long destinationId) {
-        this.destinationId = destinationId;
     }
 
     public String getFromLocation() {
