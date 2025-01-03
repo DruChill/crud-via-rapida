@@ -16,6 +16,7 @@ public class Ticket {
     private String fromLocation;
     private String toLocation;
     private LocalDate travelDate;
+    private String travelTime;
 
     // Getters and setters
 
@@ -65,5 +66,13 @@ public class Ticket {
 
     public void setTravelDate(LocalDate travelDate) {
         this.travelDate = travelDate;
+    }
+
+    public String getTravelTime() {
+        return travelTime;
+    }
+
+    public void setTravelTime(String travelTime) {
+        this.travelTime = travelTime;
     }
 }
