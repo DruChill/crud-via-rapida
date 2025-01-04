@@ -4,6 +4,8 @@ import com.viaRapida.viaRapidaProyect.model.Ticket;
 import com.viaRapida.viaRapidaProyect.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -23,7 +25,8 @@ public class TicketController {
                             @RequestParam("toLocation") String toLocation,
                             @RequestParam("travelDate") String travelDate,
                             @RequestParam("travelTime") String travelTime,
-                            @RequestParam("seatNumber") String seatNumber) {
+                            @RequestParam("seatNumber") String seatNumber,
+                            Model model) {
         try {
             LocalDate parsedDate = LocalDate.parse(travelDate);
             Ticket ticket = new Ticket();
@@ -36,10 +39,17 @@ public class TicketController {
             ticket.setTravelTime(travelTime);
             ticket.setSeatNumber(seatNumber);
             ticketService.saveTicket(ticket);
-            return "redirect:/";
+            model.addAttribute("ticket", ticket);
+            return "confirmation";
         } catch (DateTimeParseException e) {
             // Manejar el error de formato de fecha
             return "redirect:/?error=invalidDate";
         }
+    }
+
+    @GetMapping("/finalizado")
+    public String showConfirmation(Model model) {
+        // Aquí puedes agregar lógica para obtener el ticket si es necesario
+        return "confirmation";
     }
 }
