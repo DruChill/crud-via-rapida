@@ -1,4 +1,3 @@
-<!-- src/main/resources/templates/confirmation.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -6,7 +5,7 @@
     <title>Confirmación de Compra</title>
 </head>
 <body>
-    <a href="/">Regresar a inicio</a>
+    <a href="/">Home</a>
 <h1>Confirmación de Compra</h1>
 <p>Nombre del Pasajero: <span th:text="${ticket.passengerName}"></span></p>
 <p>Número de Pasajeros: <span th:text="${ticket.numberOfPassengers}"></span></p>
@@ -16,6 +15,6 @@
 <p>Fecha: <span th:text="${ticket.travelDate}"></span></p>
 <p>Hora: <span th:text="${ticket.travelTime}"></span></p>
 <p>Asiento: <span th:text="${ticket.seatNumber}"></span></p>
-<img src="https://images.vexels.com/media/users/3/158114/isolated/preview/473403ce8dee60dab42b0497450711de-elemento-de-diseno-de-codigo-de-barras-del-producto.png" alt="codigo-de-barras">
+<p>Precio: <span th:text="${ticket.price}"></span></p>
 </body>
 </html>

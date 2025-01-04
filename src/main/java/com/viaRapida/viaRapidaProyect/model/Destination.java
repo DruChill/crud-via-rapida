@@ -1,6 +1,4 @@
-
 package com.viaRapida.viaRapidaProyect.model;
-
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,15 +12,19 @@ public class Destination {
     private Long id;
     private String name;
     private String description;
+    private double price; // Nuevo campo
 
     public Destination() {
     }
 
-    public Destination(Long id, String name, String description) {
+    public Destination(Long id, String name, String description, double price) {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.price = price;
     }
+
+    // Getters and setters
 
     public Long getId() {
         return id;
@@ -46,5 +48,13 @@ public class Destination {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 }

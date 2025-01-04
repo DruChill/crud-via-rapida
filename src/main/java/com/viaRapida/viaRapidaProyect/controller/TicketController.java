@@ -1,11 +1,11 @@
 package com.viaRapida.viaRapidaProyect.controller;
 
 import com.viaRapida.viaRapidaProyect.model.Ticket;
+import com.viaRapida.viaRapidaProyect.service.DestinationService;
 import com.viaRapida.viaRapidaProyect.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -16,6 +16,9 @@ import java.time.format.DateTimeParseException;
 public class TicketController {
     @Autowired
     private TicketService ticketService;
+
+    @Autowired
+    private DestinationService destinationService;
 
     @PostMapping("/buyTicket")
     public String buyTicket(@RequestParam("passengerName") String passengerName,
@@ -38,6 +41,11 @@ public class TicketController {
             ticket.setTravelDate(parsedDate);
             ticket.setTravelTime(travelTime);
             ticket.setSeatNumber(seatNumber);
+
+            // Calcular el precio basado en los destinos seleccionados
+            double price = calculatePrice(fromLocation, toLocation);
+            ticket.setPrice(price);
+
             ticketService.saveTicket(ticket);
             model.addAttribute("ticket", ticket);
             return "confirmation";
@@ -47,9 +55,14 @@ public class TicketController {
         }
     }
 
-    @GetMapping("/finalizado")
-    public String showConfirmation(Model model) {
-        // Aquí puedes agregar lógica para obtener el ticket si es necesario
-        return "confirmation";
+    private double calculatePrice(String fromLocation, String toLocation) {
+        if ((fromLocation.equals("Huamanga") && toLocation.equals("San Miguel")) ||
+            (fromLocation.equals("San Miguel") && toLocation.equals("Huamanga"))) {
+            return 25.0;
+        } else if ((fromLocation.equals("Huamanga") && toLocation.equals("Huanta")) ||
+                   (fromLocation.equals("Huanta") && toLocation.equals("Huamanga"))) {
+            return 10.0;
+        }
+        return 0.0;
     }
 }

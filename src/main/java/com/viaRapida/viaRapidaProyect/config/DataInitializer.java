@@ -13,9 +13,9 @@ public class DataInitializer {
     public CommandLineRunner loadData(DestinationRepository destinationRepository) {
         return args -> {
             if (destinationRepository.count() == 0) {
-                destinationRepository.save(new Destination(null, "Huamanga", "Descripción de Huamanga"));
-                destinationRepository.save(new Destination(null, "Huanta", "Descripción de Huanta"));
-                destinationRepository.save(new Destination(null, "San Miguel", "Descripción de San Miguel"));
+                destinationRepository.save(new Destination(null, "Huamanga", "Descripción de Huamanga", 0.0));
+                destinationRepository.save(new Destination(null, "Huanta", "Descripción de Huanta", 0.0));
+                destinationRepository.save(new Destination(null, "San Miguel", "Descripción de San Miguel", 0.0));
             }
         };
     }

@@ -15,4 +15,8 @@ public class DestinationService {
     public List<Destination> getAllDestinations() {
         return destinationRepository.findAll();
     }
+
+    public Destination getDestinationByName(String name) {
+        return destinationRepository.findByName(name);
+    }
 }
