@@ -13,6 +13,7 @@ public class Ticket {
     private Long id;
     private String passengerName;
     private int numberOfPassengers;
+    private String dni;
     private String fromLocation;
     private String toLocation;
     private LocalDate travelDate;
@@ -34,6 +35,14 @@ public class Ticket {
 
     public void setPassengerName(String passengerName) {
         this.passengerName = passengerName;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
     }
 
     public int getNumberOfPassengers() {

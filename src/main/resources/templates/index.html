@@ -7,12 +7,8 @@
 <body>
 <h1>Compra de Boletos</h1>
 <form action="/buyTicket" method="post">
-    <label for="passengerName">Nombre del Pasajero:</label>
-    <input type="text" id="passengerName" name="passengerName" required><br><br>
-    
-    <label for="numberOfPassengers">Número de Pasajeros:</label>
-    <input type="number" id="numberOfPassengers" name="numberOfPassengers" required><br><br>
-    
+
+    <!-- paso 1 -->
     <label for="fromLocation">De:</label>
     <select id="fromLocation" name="fromLocation" required>
         <option value="" disabled selected>Seleccione un lugar de origen</option>
@@ -20,7 +16,8 @@
             <option th:value="${destination.name}" th:text="${destination.name}"></option>
         </th:block>
     </select><br><br>
-    
+
+    <!-- paso 2 -->
     <label for="toLocation">A:</label>
     <select id="toLocation" name="toLocation" required>
         <option value="" disabled selected>Seleccione un lugar de destino</option>
@@ -28,10 +25,12 @@
             <option th:value="${destination.name}" th:text="${destination.name}"></option>
         </th:block>
     </select><br><br>
-    
+
+    <!-- paso 3 -->
     <label for="travelDate">Fecha:</label>
     <input type="date" id="travelDate" name="travelDate" required><br><br>
-    
+
+    <!-- paso 4 -->
     <label for="travelTime">Hora:</label>
     <select id="travelTime" name="travelTime" required>
         <option value="" disabled selected>Seleccione una hora</option>
@@ -40,6 +39,18 @@
         <option value="16:00">4PM</option>
     </select><br><br>
     
+    <!-- paso 5 -->
+    <label for="passengerName">Nombre del Pasajero:</label>
+    <input type="text" id="passengerName" name="passengerName" required><br><br>
+    
+    <label for="dni">Ingrese su DNI</label>
+    <input pattern="\d{8}" maxlength="8" type="text" id="dni" name="dni" required><br><br>
+
+    <label for="numberOfPassengers">Número de Pasajeros:</label>
+    <input type="number" id="numberOfPassengers" name="numberOfPassengers" required><br><br>
+    
+    <!-- paso 6 -->
+     
     <button type="submit">Comprar Boleto</button>
 </form>
 </body>
