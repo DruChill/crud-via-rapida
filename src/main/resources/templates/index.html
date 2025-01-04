@@ -8,7 +8,7 @@
 <h1>Compra de Boletos</h1>
 <form action="/buyTicket" method="post">
 
-    <!-- paso 1 -->
+    <!-- paso 1 destino -->
     <label for="fromLocation">De:</label>
     <select id="fromLocation" name="fromLocation" required>
         <option value="" disabled selected>Seleccione un lugar de origen</option>
@@ -17,7 +17,6 @@
         </th:block>
     </select><br><br>
 
-    <!-- paso 2 -->
     <label for="toLocation">A:</label>
     <select id="toLocation" name="toLocation" required>
         <option value="" disabled selected>Seleccione un lugar de destino</option>
@@ -26,17 +25,27 @@
         </th:block>
     </select><br><br>
 
-    <!-- paso 3 -->
+    <!-- paso 2 fecha -->
     <label for="travelDate">Fecha:</label>
     <input type="date" id="travelDate" name="travelDate" required><br><br>
 
-    <!-- paso 4 -->
+    <!-- paso 3 hora -->
     <label for="travelTime">Hora:</label>
     <select id="travelTime" name="travelTime" required>
         <option value="" disabled selected>Seleccione una hora</option>
         <option value="05:00">5AM</option>
         <option value="12:00">12PM</option>
         <option value="16:00">4PM</option>
+    </select><br><br>
+    
+    <!-- paso 4 asientos -->
+    <label for="seatNumber">Asiento:</label>
+    <select id="seatNumber" name="seatNumber" required>
+        <option value="" disabled selected>Seleccione un asiento</option>
+        <option value="1">Asiento 1</option>
+        <option value="2">Asiento 2</option>
+        <option value="3">Asiento 3</option>
+        <option value="4">Asiento 4</option>
     </select><br><br>
     
     <!-- paso 5 -->

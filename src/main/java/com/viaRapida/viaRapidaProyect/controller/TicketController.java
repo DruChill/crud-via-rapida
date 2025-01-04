@@ -22,7 +22,8 @@ public class TicketController {
                             @RequestParam("fromLocation") String fromLocation,
                             @RequestParam("toLocation") String toLocation,
                             @RequestParam("travelDate") String travelDate,
-                            @RequestParam("travelTime") String travelTime) {
+                            @RequestParam("travelTime") String travelTime,
+                            @RequestParam("seatNumber") String seatNumber) {
         try {
             LocalDate parsedDate = LocalDate.parse(travelDate);
             Ticket ticket = new Ticket();
@@ -33,6 +34,7 @@ public class TicketController {
             ticket.setToLocation(toLocation);
             ticket.setTravelDate(parsedDate);
             ticket.setTravelTime(travelTime);
+            ticket.setSeatNumber(seatNumber);
             ticketService.saveTicket(ticket);
             return "redirect:/";
         } catch (DateTimeParseException e) {

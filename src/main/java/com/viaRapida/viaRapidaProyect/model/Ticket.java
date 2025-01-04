@@ -18,6 +18,7 @@ public class Ticket {
     private String toLocation;
     private LocalDate travelDate;
     private String travelTime;
+    private String seatNumber; // Nuevo campo
 
     // Getters and setters
 
@@ -83,5 +84,13 @@ public class Ticket {
 
     public void setTravelTime(String travelTime) {
         this.travelTime = travelTime;
+    }
+
+    public String getSeatNumber() {
+        return seatNumber;
+    }
+
+    public void setSeatNumber(String seatNumber) {
+        this.seatNumber = seatNumber;
     }
 }
