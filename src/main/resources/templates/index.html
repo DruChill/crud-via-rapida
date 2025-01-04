@@ -3,6 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Compra de Boletos</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+    <style>
+        .seat {
+            cursor: pointer;
+            font-size: 24px;
+            margin: 5px;
+        }
+        .selected {
+            color: green;
+        }
+    </style>
 </head>
 <body>
 <h1>Compra de Boletos</h1>
@@ -29,24 +40,32 @@
     <label for="travelDate">Fecha:</label>
     <input type="date" id="travelDate" name="travelDate" required><br><br>
 
-    <!-- paso 3 hora -->
-    <label for="travelTime">Hora:</label>
-    <select id="travelTime" name="travelTime" required>
-        <option value="" disabled selected>Seleccione una hora</option>
-        <option value="05:00">5AM</option>
-        <option value="12:00">12PM</option>
-        <option value="16:00">4PM</option>
-    </select><br><br>
+    <label for="travelTime">Selecione la hora</label>
+    <div id="travelTime" name="travelTime"> 
+        <input type="radio" id="5AM" name="travelTime" value="05:00">
+        <label for="5AM">5AM</label><br>
+        <input type="radio" id="12PM" name="travelTime" value="12:00">
+        <label for="12PM">12PM</label><br>
+        <input type="radio" id="4PM" name="travelTime" value="16:00">
+        <label for="4PM">4PM</label><br>
+    </div>
     
     <!-- paso 4 asientos -->
+    <label for="numberOfPassengers">Número de Pasajeros:</label>
+    <input type="number" id="numberOfPassengers" name="numberOfPassengers" required><br><br>
+    
     <label for="seatNumber">Asiento:</label>
-    <select id="seatNumber" name="seatNumber" required>
-        <option value="" disabled selected>Seleccione un asiento</option>
-        <option value="1">Asiento 1</option>
-        <option value="2">Asiento 2</option>
-        <option value="3">Asiento 3</option>
-        <option value="4">Asiento 4</option>
-    </select><br><br>
+    <div id="seatSelection">
+        <div>
+            <i class="ti ti-armchair seat" data-seat="1"></i>
+            <span>1-B</span>
+        </div>
+        <i class="ti ti-armchair seat" data-seat="2"></i>
+        <i class="ti ti-armchair seat" data-seat="3"></i>
+        <i class="ti ti-armchair seat" data-seat="4"></i>
+    </div>
+    <input type="hidden" id="seatNumber" name="seatNumber" required><br><br>
+    
     
     <!-- paso 5 -->
     <label for="passengerName">Nombre del Pasajero:</label>
@@ -55,8 +74,7 @@
     <label for="dni">Ingrese su DNI</label>
     <input pattern="\d{8}" maxlength="8" type="text" id="dni" name="dni" required><br><br>
 
-    <label for="numberOfPassengers">Número de Pasajeros:</label>
-    <input type="number" id="numberOfPassengers" name="numberOfPassengers" required><br><br>
+
     
     <!-- paso 6 -->
     <label for="paymentMethod">Método de Pago:</label><br>
@@ -71,5 +89,39 @@
 
     <button type="submit">Comprar Boleto</button>
 </form>
+
+<script>
+    document.querySelectorAll('.seat').forEach(seat => {
+        seat.addEventListener('click', function() {
+            const selectedSeats = document.querySelectorAll('.seat.selected').length;
+            const numberOfPassengers = parseInt(document.getElementById('numberOfPassengers').value);
+            
+            if (this.classList.contains('selected')) {
+                this.classList.remove('selected');
+            } else if (selectedSeats < numberOfPassengers) {
+                this.classList.add('selected');
+            }
+            
+            updateSeatNumber();
+        });
+    });
+
+    function updateSeatNumber() {
+        const selectedSeats = document.querySelectorAll('.seat.selected');
+        const seatNumbers = Array.from(selectedSeats).map(seat => seat.getAttribute('data-seat'));
+        document.getElementById('seatNumber').value = seatNumbers.join(',');
+    }
+
+    function validateSeats() {
+        const selectedSeats = document.querySelectorAll('.seat.selected').length;
+        const numberOfPassengers = parseInt(document.getElementById('numberOfPassengers').value);
+        
+        if (selectedSeats !== numberOfPassengers) {
+            alert(`Debe seleccionar ${numberOfPassengers} asientos.`);
+            return false;
+        }
+        return true;
+    }
+</script>
 </body>
 </html>
