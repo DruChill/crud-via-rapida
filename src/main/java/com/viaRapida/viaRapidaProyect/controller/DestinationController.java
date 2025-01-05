@@ -32,13 +32,16 @@ public class DestinationController {
         List<Destination> listDestinations = destinationService.getAllDestinations();
         model.addAttribute("listDestinations", listDestinations);
 
-        List<String> purchasedSeats = ticketService.getAllTickets().stream()
-                .filter(ticket -> fromLocation == null || ticket.getFromLocation().equals(fromLocation))
-                .filter(ticket -> toLocation == null || ticket.getToLocation().equals(toLocation))
-                .filter(ticket -> travelDate == null || ticket.getTravelDate().equals(LocalDate.parse(travelDate)))
-                .filter(ticket -> travelTime == null || ticket.getTravelTime().equals(travelTime))
-                .map(Ticket::getSeatNumber)
-                .collect(Collectors.toList());
+        List<String> purchasedSeats = List.of();
+        if (fromLocation != null && toLocation != null && travelDate != null && travelTime != null) {
+            purchasedSeats = ticketService.getAllTickets().stream()
+                    .filter(ticket -> ticket.getFromLocation().equals(fromLocation))
+                    .filter(ticket -> ticket.getToLocation().equals(toLocation))
+                    .filter(ticket -> ticket.getTravelDate().equals(LocalDate.parse(travelDate)))
+                    .filter(ticket -> ticket.getTravelTime().equals(travelTime))
+                    .map(Ticket::getSeatNumber)
+                    .collect(Collectors.toList());
+        }
         model.addAttribute("purchasedSeats", purchasedSeats);
 
         List<String> seatList = Arrays.asList("1-A", "2-A", "3-A", "4-A");
