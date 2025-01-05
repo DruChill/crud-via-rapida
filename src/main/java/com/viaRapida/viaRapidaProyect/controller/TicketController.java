@@ -22,7 +22,6 @@ public class TicketController {
 
     @PostMapping("/buyTicket")
     public String buyTicket(@RequestParam("passengerName") String passengerName,
-                            @RequestParam("numberOfPassengers") int numberOfPassengers,
                             @RequestParam("dni") String dni,
                             @RequestParam("fromLocation") String fromLocation,
                             @RequestParam("toLocation") String toLocation,
@@ -34,7 +33,6 @@ public class TicketController {
             LocalDate parsedDate = LocalDate.parse(travelDate);
             Ticket ticket = new Ticket();
             ticket.setPassengerName(passengerName);
-            ticket.setNumberOfPassengers(numberOfPassengers);
             ticket.setDni(dni);
             ticket.setFromLocation(fromLocation);
             ticket.setToLocation(toLocation);

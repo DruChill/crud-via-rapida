@@ -12,7 +12,6 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String passengerName;
-    private int numberOfPassengers;
     private String dni;
     private String fromLocation;
     private String toLocation;
@@ -45,14 +44,6 @@ public class Ticket {
 
     public void setDni(String dni) {
         this.dni = dni;
-    }
-
-    public int getNumberOfPassengers() {
-        return numberOfPassengers;
-    }
-
-    public void setNumberOfPassengers(int numberOfPassengers) {
-        this.numberOfPassengers = numberOfPassengers;
     }
 
     public String getFromLocation() {
