@@ -40,21 +40,15 @@
         <input type="radio" id="4PM" name="travelTime" value="16:00">
         <label for="4PM">4PM</label><br>
     </div>
-    
-    <!-- paso 4 asientos -->
+        <!-- paso 4 asientos -->
     <label for="seatNumber">Asiento:</label>
     <div id="seatSelection">
-        <div>
-            <i class="ti ti-armchair seat" data-seat="1"></i>
-            <span>1-B</span>
-        </div>
-        <i class="ti ti-armchair seat" data-seat="2"></i>
-        <i class="ti ti-armchair seat" data-seat="3"></i>
-        <i class="ti ti-armchair seat" data-seat="4"></i>
+        <th:block th:each="seat : ${seatList}">
+            <i class="ti ti-armchair seat" th:classappend="${purchasedSeats.contains(seat) ? 'purchased' : ''}" th:data-seat="${seat}"></i>
+        </th:block>
     </div>
     <input type="hidden" id="seatNumber" name="seatNumber" required><br><br>
-    
-    
+
     <!-- paso 5 -->
     <label for="passengerName">Nombre del Pasajero:</label>
     <input type="text" id="passengerName" name="passengerName" required><br><br>

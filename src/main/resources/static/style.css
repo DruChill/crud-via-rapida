@@ -1,5 +1,6 @@
 body {
-    background-color: #f0f0f0;
+    background-color: #141313;
+    color: white;
 }
 
 .seat {
@@ -9,4 +10,8 @@ body {
 }
 .selected {
     color: green;
+}
+
+.purchased {
+    color: red;
 }
