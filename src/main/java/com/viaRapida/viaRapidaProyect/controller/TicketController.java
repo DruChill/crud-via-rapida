@@ -17,9 +17,6 @@ public class TicketController {
     @Autowired
     private TicketService ticketService;
 
-    @Autowired
-    private DestinationService destinationService;
-
     @PostMapping("/buyTicket")
     public String buyTicket(@RequestParam("passengerName") String passengerName,
                             @RequestParam("dni") String dni,

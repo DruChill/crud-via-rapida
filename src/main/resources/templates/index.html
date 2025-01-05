@@ -8,7 +8,7 @@
 </head>
 <body>
 <h1>Compra de Boletos</h1>
-<form action="/buyTicket" method="post">
+<form id="ticketForm" action="/buyTicket" method="post">
 
     <!-- paso 1 destino -->
     <label for="fromLocation">De:</label>
@@ -56,19 +56,6 @@
     <label for="dni">Ingrese su DNI</label>
     <input pattern="\d{8}" maxlength="8" type="text" id="dni" name="dni" required><br><br>
 
-
-    
-    <!-- paso 6 -->
-    <!-- <label for="paymentMethod">Método de Pago:</label><br>
-    <label for="cardnumber">Número de tarjeta:</label><br>
-    <input type="text" id="cardnumber" name="cardnumber" pattern="\d{16}" maxlength="16" required><br><br>
-    <label for="cardholder">Nombre del titular de la tarjeta:</label><br>
-    <input type="text" id="cardholder" name="cardholder" required><br><br>
-    <label for="cvv">CVV:</label><br>
-    <input type="text" id="cvv" name="cvv" pattern="\d{3}" maxlength="3" required><br><br>
-    <label for="expiry">Fecha de expiración (MM/AA):</label><br>
-    <input type="text" id="expiry" name="expiry" pattern="\d{2}/\d{2}" maxlength="5" placeholder="MM/AA" required><br><br> -->
-
     <button type="submit">Comprar Boleto</button>
 </form>
 
@@ -81,13 +68,36 @@
         });
     });
 
-    function validateSeat() {
-        const selectedSeat = document.querySelectorAll('.seat.selected').length;
-        if (selectedSeat === 0) {
-            alert('Debe seleccionar un asiento.');
-            return false;
+    document.getElementById('fromLocation').addEventListener('change', updateSeats);
+    document.getElementById('toLocation').addEventListener('change', updateSeats);
+    document.getElementById('travelDate').addEventListener('change', updateSeats);
+    document.querySelectorAll('input[name="travelTime"]').forEach(radio => {
+        radio.addEventListener('change', updateSeats);
+    });
+
+    function updateSeats() {
+        const fromLocation = document.getElementById('fromLocation').value;
+        const toLocation = document.getElementById('toLocation').value;
+        const travelDate = document.getElementById('travelDate').value;
+        const travelTime = document.querySelector('input[name="travelTime"]:checked')?.value;
+
+        if (fromLocation && toLocation && travelDate && travelTime) {
+            fetch(`/?fromLocation=${fromLocation}&toLocation=${toLocation}&travelDate=${travelDate}&travelTime=${travelTime}`)
+                .then(response => response.text())
+                .then(html => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    const newSeatSelection = doc.getElementById('seatSelection');
+                    document.getElementById('seatSelection').innerHTML = newSeatSelection.innerHTML;
+                    document.querySelectorAll('.seat').forEach(seat => {
+                        seat.addEventListener('click', function() {
+                            document.querySelectorAll('.seat').forEach(s => s.classList.remove('selected'));
+                            this.classList.add('selected');
+                            document.getElementById('seatNumber').value = this.getAttribute('data-seat');
+                        });
+                    });
+                });
         }
-        return true;
     }
 </script>
 </body>
