@@ -49,13 +49,16 @@ public class TicketController {
         }
     }
 
-    private double calculatePrice(String fromLocation, String toLocation) {
+        private double calculatePrice(String fromLocation, String toLocation) {
         if ((fromLocation.equals("Huamanga") && toLocation.equals("San Miguel")) ||
             (fromLocation.equals("San Miguel") && toLocation.equals("Huamanga"))) {
             return 25.0;
         } else if ((fromLocation.equals("Huamanga") && toLocation.equals("Huanta")) ||
                    (fromLocation.equals("Huanta") && toLocation.equals("Huamanga"))) {
             return 10.0;
+        } else if ((fromLocation.equals("Huanta") && toLocation.equals("San Miguel")) ||
+                   (fromLocation.equals("San Miguel") && toLocation.equals("Huanta"))) {
+            return 15.0;
         }
         return 0.0;
     }
