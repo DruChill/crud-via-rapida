@@ -20,4 +20,12 @@ public class TicketService {
     public List<Ticket> getAllTickets() {
         return ticketRepository.findAll();
     }
+
+    public Ticket getTicketById(Long id) {
+        return ticketRepository.findById(id).orElse(null);
+    }
+
+    public void deleteTicketById(Long id) {
+        ticketRepository.deleteById(id);
+    }
 }

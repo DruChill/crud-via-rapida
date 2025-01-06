@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin</title>
+</head>
+<body>
+<h1>Admin Panel</h1>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Passenger Name</th>
+            <th>DNI</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Seat</th>
+            <th>Price</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="ticket : ${tickets}">
+            <td th:text="${ticket.id}"></td>
+            <td th:text="${ticket.passengerName}"></td>
+            <td th:text="${ticket.dni}"></td>
+            <td th:text="${ticket.fromLocation}"></td>
+            <td th:text="${ticket.toLocation}"></td>
+            <td th:text="${ticket.travelDate}"></td>
+            <td th:text="${ticket.travelTime}"></td>
+            <td th:text="${ticket.seatNumber}"></td>
+            <td th:text="${ticket.price}"></td>
+            <td>
+                <a th:href="@{/admin/edit/{id}(id=${ticket.id})}">Edit</a>
+                <a th:href="@{/admin/delete/{id}(id=${ticket.id})}">Delete</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>
