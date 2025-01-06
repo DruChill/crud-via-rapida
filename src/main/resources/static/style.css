@@ -1,6 +1,53 @@
+:root {
+    --bg-color: #F9FBFA;
+    --primary-color: #FFFFFF;
+    --secondary-color: #EC441E;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
-    background-color: #141313;
-    color: white;
+    background-color: var(--bg-color);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+
+#ticketForm {
+    background: #FFFFFF;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+    padding: 1.2rem;
+    max-width: 350px;
+    height: 300px;
+    /* margin: 0 auto; */
+    border-radius: 1rem;
+    position: relative; /* Añade posición relativa para el contenedor */
+}
+
+.step {
+    display: none;
+}
+.step.active {
+    display: block;
+}
+.step-buttons {
+    position: absolute; /* Posiciona los botones de manera absoluta */
+    bottom: 20px; /* Fija los botones a 20px del fondo */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%; /* Asegura que los botones ocupen todo el ancho del contenedor */
+    text-align: center; /* Centra los botones horizontalmente */
+}
+.step-buttons button {
+    margin-right: 10px;
+    padding: 10px 20px;
+    border-radius: .4rem;
+    border: none;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
 }
 
 .seat {
