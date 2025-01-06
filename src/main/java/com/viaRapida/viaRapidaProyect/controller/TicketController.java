@@ -1,7 +1,6 @@
 package com.viaRapida.viaRapidaProyect.controller;
 
 import com.viaRapida.viaRapidaProyect.model.Ticket;
-import com.viaRapida.viaRapidaProyect.service.DestinationService;
 import com.viaRapida.viaRapidaProyect.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
