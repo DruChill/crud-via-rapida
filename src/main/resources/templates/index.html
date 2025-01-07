@@ -9,103 +9,186 @@
     <link rel="stylesheet" href="/src/main/resources/static/style.css">
 </head>
 <body>
-<h1>Compra de Boletos</h1>
-<form id="ticketForm" action="/buyTicket" method="post">
 
-    <!-- paso 1 destino -->
-    <div class="step active">
-        <label for="fromLocation">De:</label>
-        <select id="fromLocation" name="fromLocation" required>
-            <option value="" disabled selected>Seleccione un lugar de origen</option>
-            <th:block th:each="destination : ${listDestinations}">
-                <option th:value="${destination.name}" th:text="${destination.name}"></option>
-            </th:block>
-        </select><br><br>
+<header>
+    <img src="" alt="logo-de-la-empresa">
+    <nav>
+        <a href="/">Inicio</a>
+        <a href="#">Soporte</a>
+        <a href="#">Admin</a>
+    </nav>
+</header>
 
-        <label for="toLocation">A:</label>
-        <select id="toLocation" name="toLocation" required>
-            <option value="" disabled selected>Seleccione un lugar de destino</option>
-            <th:block th:each="destination : ${listDestinations}">
-                <option th:value="${destination.name}" th:text="${destination.name}"></option>
-            </th:block>
-        </select><br><br>
-        <div class="step-buttons">
-            <button type="button" onclick="nextStep()">Siguiente</button>
+<main>
+<section class="hero__container">
+    <div class="form-container">
+        <div class="hero__text">
+            <h1>Compra de Boletos</h1>
+            <p>¡Reserva tu boleto ahora!</p>
+        </div>
+        <div>
+            <form id="ticketForm" action="/buyTicket" method="post">
+
+                <!-- paso 1 destino -->
+                <div class="step active">
+                    <p>Destino</p>
+                    <select id="fromLocation" name="fromLocation" required>
+                        <option value="" disabled selected>Seleccione un lugar de origen</option>
+                        <th:block th:each="destination : ${listDestinations}">
+                            <option th:value="${destination.name}" th:text="${destination.name}"></option>
+                        </th:block>
+                    </select>
+
+                    <select id="toLocation" name="toLocation" required>
+                        <option value="" disabled selected>Seleccione un lugar de destino</option>
+                        <th:block th:each="destination : ${listDestinations}">
+                            <option th:value="${destination.name}" th:text="${destination.name}"></option>
+                        </th:block>
+                    </select>
+                    <div class="step-buttons">
+                        <button type="button" onclick="nextStep()">Siguiente</button>
+                    </div>
+                    <span>Pronto estaremos agregando más destinos!</span>
+                </div>
+            
+                <!-- paso 2 fecha -->
+                <div class="step">
+                    <p>Fecha:</p>
+                    <input type="date" id="travelDate" name="travelDate" required>
+                    <div class="step-buttons">
+                        <button class="btn-back" type="button" onclick="prevStep()">Regresar</button>
+                        <button class="btn-next" type="button" onclick="nextStep()">Siguiente</button>
+                    </div>
+                </div>
+            
+                <!-- paso 3 hora -->
+                <div class="step">
+                    <p>Seleccione la hora</p>
+                    <div id="travelTime" name="travelTime"> 
+                        <button type="button" class="time-button" data-time="05:00">5AM</button>
+                        <button type="button" class="time-button" data-time="12:00">12PM</button>
+                        <button type="button" class="time-button" data-time="16:00">4PM</button>
+                    </div>
+                    <div class="step-buttons">
+                        <button type="button" onclick="prevStep()">Regresar</button>
+                        <button type="button" onclick="nextStep()">Siguiente</button>
+                    </div>
+                </div>
+                <input type="hidden" id="travelTimeInput" name="travelTime" required>
+            
+                <!-- paso 4 asientos -->
+                <div class="step">
+                    <p>Asiento</p>
+                    <div id="seatSelection">
+                        <th:block th:each="seat : ${seatList}">
+                            <i class="ti ti-armchair seat" th:classappend="${purchasedSeats.contains(seat) ? 'purchased' : ''}" th:data-seat="${seat}"></i>
+                        </th:block>
+                    </div>
+                    <input type="hidden" id="seatNumber" name="seatNumber" required>
+                    <div class="step-buttons">
+                        <button type="button" onclick="prevStep()">Regresar</button>
+                        <button type="button" onclick="nextStep()">Siguiente</button>
+                    </div>
+                </div>
+            
+                <!-- paso 5 -->
+                <div class="step">
+                    <p>Datos del pajasero:</p>
+                    <input type="text" id="passengerName" name="passengerName" placeholder="Nombre del Pasajero:">
+                    
+                    <input pattern="\d{8}" maxlength="8" type="text" id="dni" name="dni" placeholder="Ingrese su DNI">
+                    <div class="step-buttons">
+                        <button type="button" onclick="prevStep()">Regresar</button>
+                        <button type="button" onclick="nextStep()">Siguiente</button>
+                    </div>
+                </div>
+                <!-- paso 6 -->
+                <div class="step">
+                    <div class="payment">
+                        <label for="paymentMethod">Método de Pago:</label>
+                        <input type="text" id="cardnumber" name="cardnumber" pattern="\d{16}" maxlength="16" placeholder="Número de tarjeta:">
+                        <!-- <input type="text" id="cardholder" name="cardholder" placeholder="Nombre del titular de la tarjeta:"> -->
+                        <input type="text" id="cvv" name="cvv" pattern="\d{3}" maxlength="3" placeholder="CVV">
+                        <input type="text" id="expiry" name="expiry" pattern="\d{2}/\d{2}" maxlength="5" placeholder="MM/AA">
+                    </div>
+                    <div class="step-buttons">
+                        <button type="button" onclick="prevStep()">Regresar</button>
+                        <button type="submit">Comprar Boleto</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
-
-    <!-- paso 2 fecha -->
-    <div class="step">
-        <label for="travelDate">Fecha:</label>
-        <input type="date" id="travelDate" name="travelDate" required><br><br>
-        <div class="step-buttons">
-            <button class="btn-back" type="button" onclick="prevStep()">Regresar</button>
-            <button class="btn-next" type="button" onclick="nextStep()">Siguiente</button>
+</section>
+<section class="hero__icons">
+    <div class="section-cards">
+        <a href="#">
+            <div class="card">
+                <h3>Buscar ticket</h3>
+                <i class="ti ti-search"></i>
+            </div>
+        </a>
+        <div class="card">
+            <h3>Atención al cliente</h3>
+            <i class="ti ti-search"></i>
+        </div>
+        <div class="card">
+            <h3>Administrador</h3>
+            <i class="ti ti-search"></i>
+        </div>
+        <div class="card">
+            <h3>Buscar ticket</h3>
+            <i class="ti ti-search"></i>
         </div>
     </div>
-
-    <!-- paso 3 hora -->
-    <div class="step">
-        <label for="travelTime">Selecione la hora</label>
-        <div id="travelTime" name="travelTime"> 
-            <input type="radio" id="5AM" name="travelTime" value="05:00">
-            <label for="5AM">5AM</label><br>
-            <input type="radio" id="12PM" name="travelTime" value="12:00">
-            <label for="12PM">12PM</label><br>
-            <input type="radio" id="4PM" name="travelTime" value="16:00">
-            <label for="4PM">4PM</label><br>
+</section>
+<section class="hero__destinos">
+    <h2>Destinos!</h2>
+    <div class="destinos">
+        <div class="destino-card">
+            <img src="https://denomades-blog.imgix.net/blog/wp-content/uploads/2020/09/13172228/arco-ayacucho.jpg?auto=compress%2Cformat&ixlib=php-3.3.1" alt="img-destino">
+            <h4>Ayacucho</h4>
+            <p>Precio: 25.00</p>
+            <div class="badge">
+                <span>Economy</span>
+                <span>2 horas!</span>
+            </div>
         </div>
-        <div class="step-buttons">
-            <button type="button" onclick="prevStep()">Regresar</button>
-            <button type="button" onclick="nextStep()">Siguiente</button>
+        <div class="destino-card">
+            <img src="https://denomades-blog.imgix.net/blog/wp-content/uploads/2020/09/13172228/arco-ayacucho.jpg?auto=compress%2Cformat&ixlib=php-3.3.1" alt="img-destino">
+            <h4>Ayacucho</h4>
+            <p>Precio: 25.00</p>
+            <div class="badge">
+                <span>Economy</span>
+                <span>2 horas!</span>
+            </div>
+        </div>
+        <div class="destino-card">
+            <img src="https://denomades-blog.imgix.net/blog/wp-content/uploads/2020/09/13172228/arco-ayacucho.jpg?auto=compress%2Cformat&ixlib=php-3.3.1" alt="img-destino">
+            <div class="destino-card-content">
+                <h4>Ayacucho</h4>
+                <p>Precio: 25.00</p>
+                <div class="badge">
+                    <span>Economy</span>
+                    <span>2 horas!</span>
+                </div>
+            </div>
+        </div>
+        <div class="destino-card">
+            <img src="https://denomades-blog.imgix.net/blog/wp-content/uploads/2020/09/13172228/arco-ayacucho.jpg?auto=compress%2Cformat&ixlib=php-3.3.1" alt="img-destino">
+            <div class="destino-card-content">
+                <h4>Ayacucho</h4>
+                <p>Precio: 25.00</p>
+                <div class="badge">
+                    <span>Economy</span>
+                    <span>2 horas!</span>
+                </div>
+            </div>
         </div>
     </div>
-
-    <!-- paso 4 asientos -->
-    <div class="step">
-        <label for="seatNumber">Asiento:</label>
-        <div id="seatSelection">
-            <th:block th:each="seat : ${seatList}">
-                <i class="ti ti-armchair seat" th:classappend="${purchasedSeats.contains(seat) ? 'purchased' : ''}" th:data-seat="${seat}"></i>
-            </th:block>
-        </div>
-        <input type="hidden" id="seatNumber" name="seatNumber" required><br><br>
-        <div class="step-buttons">
-            <button type="button" onclick="prevStep()">Regresar</button>
-            <button type="button" onclick="nextStep()">Siguiente</button>
-        </div>
-    </div>
-
-    <!-- paso 5 -->
-    <div class="step">
-        <label for="passengerName">Nombre del Pasajero:</label>
-        <input type="text" id="passengerName" name="passengerName"><br><br>
-        
-        <label for="dni">Ingrese su DNI</label>
-        <input pattern="\d{8}" maxlength="8" type="text" id="dni" name="dni"><br><br>
-        <div class="step-buttons">
-            <button type="button" onclick="prevStep()">Regresar</button>
-            <button type="button" onclick="nextStep()">Siguiente</button>
-        </div>
-    </div>
-    <!-- paso 6 -->
-     <div class="step">
-        <label for="paymentMethod">Método de Pago:</label><br>
-        <label for="cardnumber">Número de tarjeta:</label><br>
-        <input type="text" id="cardnumber" name="cardnumber" pattern="\d{16}" maxlength="16"><br><br>
-        <label for="cardholder">Nombre del titular de la tarjeta:</label><br>
-        <input type="text" id="cardholder" name="cardholder"><br><br>
-        <label for="cvv">CVV:</label><br>
-        <input type="text" id="cvv" name="cvv" pattern="\d{3}" maxlength="3" ><br><br>
-        <label for="expiry">Fecha de expiración (MM/AA):</label><br>
-        <input type="text" id="expiry" name="expiry" pattern="\d{2}/\d{2}" maxlength="5" placeholder="MM/AA"><br><br>
-        <div class="step-buttons">
-            <button type="button" onclick="prevStep()">Regresar</button>
-            <button type="submit">Comprar Boleto</button>
-        </div>
-     </div>
-</form>
-
+</section>
+</main>
+</body>
 <script>
     let currentStep = 0;
     const steps = document.querySelectorAll('.step');
