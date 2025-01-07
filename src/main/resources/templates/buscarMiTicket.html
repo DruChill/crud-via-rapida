@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Buscar Mi Ticket</title>
+</head>
+<body>
+<h1>Buscar Mi Ticket</h1>
+<form action="/buscarMiTicket" method="get">
+    <label for="dni">Ingrese su DNI:</label>
+    <input pattern="\d{8}" type="text" id="dni" name="dni" required maxlength="8">
+    <button type="submit">Buscar</button>
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>DNI</th>
+            <th>From Location</th>
+            <th>Passenger Name</th>
+            <th>Price</th>
+            <th>Seat Number</th>
+            <th>To Location</th>
+            <th>Travel Date</th>
+            <th>Travel Time</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="ticket : ${tickets}">
+            <td th:text="${ticket.id}"></td>
+            <td th:text="${ticket.dni}"></td>
+            <td th:text="${ticket.fromLocation}"></td>
+            <td th:text="${ticket.passengerName}"></td>
+            <td th:text="${ticket.price}"></td>
+            <td th:text="${ticket.seatNumber}"></td>
+            <td th:text="${ticket.toLocation}"></td>
+            <td th:text="${ticket.travelDate}"></td>
+            <td th:text="${ticket.travelTime}"></td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>

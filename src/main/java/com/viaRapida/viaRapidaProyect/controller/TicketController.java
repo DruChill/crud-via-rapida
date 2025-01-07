@@ -5,11 +5,13 @@ import com.viaRapida.viaRapidaProyect.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.List;
 
 @Controller
 public class TicketController {
@@ -61,5 +63,14 @@ public class TicketController {
             return 15.0;
         }
         return 0.0;
+    }
+        @GetMapping("/buscarMiTicket")
+    public String buscarMiTicket(@RequestParam(value = "dni", required = false) String dni, Model model) {
+        List<Ticket> tickets = List.of();
+        if (dni != null && !dni.isEmpty()) {
+            tickets = ticketService.getTicketsByDni(dni);
+        }
+        model.addAttribute("tickets", tickets);
+        return "buscarMiTicket";
     }
 }

@@ -2,11 +2,10 @@ package com.viaRapida.viaRapidaProyect.service;
 
 import com.viaRapida.viaRapidaProyect.model.Ticket;
 import com.viaRapida.viaRapidaProyect.repository.TicketRepository;
-
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class TicketService {
@@ -27,5 +26,9 @@ public class TicketService {
 
     public void deleteTicketById(Long id) {
         ticketRepository.deleteById(id);
+    }
+
+    public List<Ticket> getTicketsByDni(String dni) {
+        return ticketRepository.findByDni(dni);
     }
 }
