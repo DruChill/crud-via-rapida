@@ -2,43 +2,144 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buscar Mi Ticket</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/src/main/resources/static/style.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f4f4;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .form-container {
+            max-width: 500px;
+            margin: 60px auto;
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .form-header {
+            text-align: center;
+            color: #EC441E;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .btn-custom {
+            background-color: #EC441E;
+            color: #fff;
+            border: none;
+            font-size: 1rem;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-custom:hover {
+            background-color: #d93b1b;
+        }
+
+        label {
+            font-weight: 600;
+        }
+
+        .form-control {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+        }
+    </style>
 </head>
 <body>
-<h1>Buscar Mi Ticket</h1>
-<form action="/buscarMiTicket" method="get">
-    <label for="dni">Ingrese su DNI:</label>
-    <input pattern="\d{8}" type="text" id="dni" name="dni" required maxlength="8">
-    <button type="submit">Buscar</button>
-</form>
-
-<table>
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>DNI</th>
-            <th>From Location</th>
-            <th>Passenger Name</th>
-            <th>Price</th>
-            <th>Seat Number</th>
-            <th>To Location</th>
-            <th>Travel Date</th>
-            <th>Travel Time</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr th:each="ticket : ${tickets}">
-            <td th:text="${ticket.id}"></td>
-            <td th:text="${ticket.dni}"></td>
-            <td th:text="${ticket.fromLocation}"></td>
-            <td th:text="${ticket.passengerName}"></td>
-            <td th:text="${ticket.price}"></td>
-            <td th:text="${ticket.seatNumber}"></td>
-            <td th:text="${ticket.toLocation}"></td>
-            <td th:text="${ticket.travelDate}"></td>
-            <td th:text="${ticket.travelTime}"></td>
-        </tr>
-    </tbody>
-</table>
+    <header>
+        <a href="/">
+            <img src="https://www.pngall.com/wp-content/uploads/13/Anime-Logo-Transparent.png" alt="logo-de-la-empresa" style="width: 60px;">
+        </a>
+        <nav>
+            <ul>
+                <li><a href="/comentarios">Soporte</a></li>
+                <li><a href="/login">Administrador</a></li>
+                <li><a href="/buscarMiTicket">Buscar Boleto</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="form-container">
+            <h2 class="form-header">Buscar Mi Ticket</h2>
+            <form action="/buscarMiTicket" method="get">
+                <div class="mb-3">
+                    <label for="dni" class="form-label">DNI:</label>
+                    <input pattern="\d{8}" type="text" class="form-control" id="dni" name="dni" maxlength="8" required>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-custom w-100">Buscar</button>
+                </div>
+            </form>
+        </div>
+        <table class="table mt-5">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>DNI</th>
+                    <th>From Location</th>
+                    <th>Passenger Name</th>
+                    <th>Price</th>
+                    <th>Seat Number</th>
+                    <th>To Location</th>
+                    <th>Travel Date</th>
+                    <th>Travel Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="ticket : ${tickets}">
+                    <td th:text="${ticket.id}"></td>
+                    <td th:text="${ticket.dni}"></td>
+                    <td th:text="${ticket.fromLocation}"></td>
+                    <td th:text="${ticket.passengerName}"></td>
+                    <td th:text="${ticket.price}"></td>
+                    <td th:text="${ticket.seatNumber}"></td>
+                    <td th:text="${ticket.toLocation}"></td>
+                    <td th:text="${ticket.travelDate}"></td>
+                    <td th:text="${ticket.travelTime}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <footer>
+        <div class="columna">
+            <h5>Vía Rápida</h5>
+            <p>Inicio</p>
+            <p>Destinos</p>
+            <p>Soporte</p>
+            <p>Administrador</p>
+        </div>
+        <div class="columna">
+            <h5>Soporte</h5>
+            <p>Contáctanos</p>
+            <p>Preguntas Frecuentes</p>
+            <p>Políticas de Privacidad</p>
+        </div>
+        <div class="columna">
+            <h5>Redes Sociales</h5>
+            <p>Facebook</p>
+            <p>Instagram</p>
+            <p>Twitter</p>
+        </div>
+    
+        <div class="columna">
+            <h5>Descarga Nuestra App</h5>
+            <img src="" alt="AppStore">
+            <img src="" alt="PlayStore">
+        </div>
+    
+    </footer>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
