@@ -58,7 +58,6 @@
         </div>
         <div class="content">
             <form id="ticketForm" action="/buyTicket" method="post">
-
                 <!-- paso 1 destino -->
                 <div class="step active">
                     <p>Destino</p>
@@ -68,7 +67,7 @@
                             <option th:value="${destination.name}" th:text="${destination.name}"></option>
                         </th:block>
                     </select>
-
+        
                     <select id="toLocation" name="toLocation" required>
                         <option value="" disabled selected>Seleccione un lugar de destino</option>
                         <th:block th:each="destination : ${listDestinations}">
@@ -80,7 +79,7 @@
                     </div>
                     <span>Pronto estaremos agregando más destinos!</span>
                 </div>
-            
+        
                 <!-- paso 2 fecha -->
                 <div class="step">
                     <p>Fecha:</p>
@@ -90,11 +89,11 @@
                         <button class="btn-next" type="button" onclick="nextStep()">Siguiente</button>
                     </div>
                 </div>
-            
+        
                 <!-- paso 3 hora -->
                 <div class="step">
                     <p>Seleccione la hora</p>
-                    <div id="travelTime" name="travelTime"> 
+                    <div id="travelTime" name="travelTime">
                         <button type="button" class="time-button" data-time="05:00">5AM</button>
                         <button type="button" class="time-button" data-time="12:00">12PM</button>
                         <button type="button" class="time-button" data-time="16:00">4PM</button>
@@ -105,7 +104,7 @@
                     </div>
                 </div>
                 <input type="hidden" id="travelTimeInput" name="travelTime" required>
-            
+        
                 <!-- paso 4 asientos -->
                 <div class="step">
                     <p>Asiento</p>
@@ -120,24 +119,24 @@
                         <button type="button" onclick="nextStep()">Siguiente</button>
                     </div>
                 </div>
-            
-                <!-- paso 5 -->
+        
+                <!-- paso 5 datos del pasajero -->
                 <div class="step">
-                    <p>Datos del pajasero:</p>
+                    <p>Datos del pasajero:</p>
                     <input type="text" id="passengerName" name="passengerName" placeholder="Nombre del Pasajero:" required>
-                    
+        
                     <input pattern="\d{8}" maxlength="8" type="text" id="dni" name="dni" placeholder="Ingrese su DNI" required>
                     <div class="step-buttons">
                         <button type="button" onclick="prevStep()">Regresar</button>
                         <button type="button" onclick="nextStep()">Siguiente</button>
                     </div>
                 </div>
-                <!-- paso 6 -->
+        
+                <!-- paso 6 pago -->
                 <div class="step">
                     <div class="payment">
                         <label for="paymentMethod">Método de Pago:</label>
                         <input type="text" id="cardnumber" name="cardnumber" pattern="\d{16}" maxlength="16" placeholder="Número de tarjeta:" required>
-                        <!-- <input type="text" id="cardholder" name="cardholder" placeholder="Nombre del titular de la tarjeta:"> -->
                         <input type="text" id="cvv" name="cvv" pattern="\d{3}" maxlength="3" placeholder="CVV" required>
                         <input type="text" id="expiry" name="expiry" pattern="\d{2}/\d{2}" maxlength="5" placeholder="MM/AA" required>
                     </div>
