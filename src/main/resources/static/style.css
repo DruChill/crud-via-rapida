@@ -25,7 +25,7 @@ header {
     justify-content: space-around;
     align-items: center;
     padding: 2rem;
-    background-color: var(--secondary-color);
+
     color: var(--primary-color);
 }
 
@@ -44,11 +44,23 @@ header nav ul li a {
     color: var(--primary-color);
 }
 
+header nav ul li a:hover {
+    text-decoration: none;
+    color: var(--secondary-color);
+}
+
 .texto-principal {
     text-align: center;
-    font-size: 1.2rem;
     margin: 2rem;
     color: var(--bg-color);
+}
+
+.texto-principal > h1 {
+    font-size: 2.1rem;
+}
+
+#element {
+    font-weight: 200;
 }
 
 #ticketForm {
@@ -97,11 +109,11 @@ header nav ul li a {
     color: var(--primary-color); 
 }
 
-.hero__container {
+/* .hero__container {
     padding: 2rem;
     background-image: url('https://www.latamairlines.com/content/dam/latamxp/sites/destinos/chile/deals/scl-deals.jpg');
     background-size: cover;
-}
+} */
 
 .hero__text {
     color: var(--primary-color);
@@ -199,6 +211,10 @@ input::placeholder {
 
 .card:hover {
     transform: translateY(-5px);
+}
+
+.card i {
+    font-size: 2rem;
 }
 
 .hero__destinos {

@@ -2,10 +2,27 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <script src="/animation.js"></script>
     <title>Vía Rápida - Compra de boletos en linea</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
     <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="/src/main/resources/static/style.css">
+    <style>
+        .hero__container {
+            height: 600px;
+            overflow: hidden;
+        }
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center; /* Hace que el video cubra toda la pantalla sin distorsionarse */
+            z-index: -1; /* Envía el video al fondo, detrás del contenido */
+        }
+    </style>
 </head>
 <body>
 
@@ -15,6 +32,7 @@
     </a>
     <nav>
         <ul>
+            <li><a href="/">Inicio</a></li>
             <li><a href="/comentarios">Soporte</a></li>
             <li><a href="/login">Administrador</a></li>
             <li><a href="/buscarMiTicket">Buscar Boleto</a></li>
@@ -24,12 +42,21 @@
 
 <main>
 <section class="hero__container">
+    
+    <video class="video-background" autoplay muted loop>
+        <source src="/videoplayback.webm" type="video/webm">
+        <!-- Puedes agregar más formatos de video como MP4 o Ogg para mayor compatibilidad -->
+        <source src="tu-video.mp4" type="video/mp4">
+        <source src="tu-video.ogv" type="video/ogv">
+        Tu navegador no soporta el elemento de video.
+    </video>
+
+
     <div class="form-container">
         <div class="texto-principal">
-            <h1>Vía Rápida</h1>
-            <!-- <p>¡Compra tu boleto ahora!</p> -->
+            <h1 class="titulo">Vía Rápida <br> <span id="element"></span></h1>
         </div>
-        <div>
+        <div class="content">
             <form id="ticketForm" action="/buyTicket" method="post">
 
                 <!-- paso 1 destino -->
@@ -154,7 +181,7 @@
     <h2>Destinos!</h2>
     <div class="destinos">
         <div class="destino-card">
-            <img src="https://denomades-blog.imgix.net/blog/wp-content/uploads/2020/09/13172228/arco-ayacucho.jpg?auto=compress%2Cformat&ixlib=php-3.3.1" alt="img-destino">
+            <img src="https://firebasestorage.googleapis.com/v0/b/ponticloud.appspot.com/o/images%2Fe7fd436d-58d6-4749-84af-c7e58ed14641.png?alt=media&token=5da8a623-8f10-4d1d-9069-6232e36adbb7" alt="">
             <div class="destino-card-content">
                 <h4>Ayacucho</h4>
                 <p>Salida todo los días</p>
@@ -177,7 +204,7 @@
         </div>
 
         <div class="destino-card">
-            <img src="https://denomades-blog.imgix.net/blog/wp-content/uploads/2020/09/13172228/arco-ayacucho.jpg?auto=compress%2Cformat&ixlib=php-3.3.1" alt="img-destino">
+            <img src="https://firebasestorage.googleapis.com/v0/b/ponticloud.appspot.com/o/images%2Faba99014-7316-4b40-9027-a0fe0041cce2.png?alt=media&token=56945636-faaf-43ef-be2f-7e7d7ddef712" alt="">
             <div class="destino-card-content">
                 <h4>Ayacucho</h4>
                 <p>Salida todo los días</p>
@@ -200,7 +227,7 @@
         </div>
 
         <div class="destino-card">
-            <img src="https://denomades-blog.imgix.net/blog/wp-content/uploads/2020/09/13172228/arco-ayacucho.jpg?auto=compress%2Cformat&ixlib=php-3.3.1" alt="img-destino">
+            <img src="https://diariocorreo.pe/resizer/0gVpgM6X3kOBIUwZiniyIn5SHyM=/980x0/smart/filters:format(jpeg):quality(75)/arc-anglerfish-arc2-prod-elcomercio.s3.amazonaws.com/public/MXLJGFQPO5HDVBCGRQAHXA55HM.jpg" alt="">
             <div class="destino-card-content">
                 <h4>Ayacucho</h4>
                 <p>Salida todo los días</p>
@@ -225,6 +252,12 @@
 </section>
 <section class="hero__img">
     <img src="https://scontent.flim6-4.fna.fbcdn.net/v/t1.6435-9/82578020_10157114588942400_3220128180870316032_n.png?_nc_cat=108&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeGczux6YA2IfhVT2KSXPRzlHN3Wdl8bWjYc3dZ2XxtaNk0gx20PdGPB-5ZrqJqX5GOa3fPAUzl3cyAV5bO0Uo-g&_nc_ohc=L1xkMI5O2rEQ7kNvgE8UwDY&_nc_oc=AdhM2XLAMJxuk0lh5OJMjJUjFwwYtoYMAJ4uPEAgNEainhakfqhY981mS1HYrbKZol4&_nc_zt=23&_nc_ht=scontent.flim6-4.fna&_nc_gid=AeXrJVdD86yph8Ls7xaMo5y&oh=00_AYApEBw7Gehm6SIifmv4mKvFORoIJ7MRppcDgMAGRoGx6A&oe=67A40C82" alt="img-hero">
+</section>
+<section class="hero__img">
+    <img src="https://denomades-blog.imgix.net/blog/wp-content/uploads/2020/09/13172228/arco-ayacucho.jpg?auto=compress%2Cformat&ixlib=php-3.3.1" alt="img-destino">
+</section>
+<section class="hero__img">
+    
 </section>
 </main>
 <footer>
@@ -281,6 +314,14 @@
         }
     }
 </script>
+<script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+<script>
+    var typed = new Typed('#element', {
+      strings: ['Rápido', 'seguro', 'confiable', 'barato', 'Compra tu boleto ahora!'],
+      typeSpeed: 75,
+        backSpeed: 50
+    });
+  </script>
 <script src="/main.js"></script>
 </body>
 </html>
