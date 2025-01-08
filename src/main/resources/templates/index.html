@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/src/main/resources/static/style.css">
     <style>
         .hero__container {
-            height: 600px;
+            height: 100vh;
             overflow: hidden;
         }
         .video-background {
@@ -26,7 +26,7 @@
 </head>
 <body>
 
-<header>
+<header class="index-header">
     <a href="/">
         <img src="https://www.pngall.com/wp-content/uploads/13/Anime-Logo-Transparent.png" alt="logo-de-la-empresa" style="width: 60px;">
     </a>
@@ -124,9 +124,9 @@
                 <!-- paso 5 -->
                 <div class="step">
                     <p>Datos del pajasero:</p>
-                    <input type="text" id="passengerName" name="passengerName" placeholder="Nombre del Pasajero:">
+                    <input type="text" id="passengerName" name="passengerName" placeholder="Nombre del Pasajero:" required>
                     
-                    <input pattern="\d{8}" maxlength="8" type="text" id="dni" name="dni" placeholder="Ingrese su DNI">
+                    <input pattern="\d{8}" maxlength="8" type="text" id="dni" name="dni" placeholder="Ingrese su DNI" required>
                     <div class="step-buttons">
                         <button type="button" onclick="prevStep()">Regresar</button>
                         <button type="button" onclick="nextStep()">Siguiente</button>
@@ -136,10 +136,10 @@
                 <div class="step">
                     <div class="payment">
                         <label for="paymentMethod">Método de Pago:</label>
-                        <input type="text" id="cardnumber" name="cardnumber" pattern="\d{16}" maxlength="16" placeholder="Número de tarjeta:">
+                        <input type="text" id="cardnumber" name="cardnumber" pattern="\d{16}" maxlength="16" placeholder="Número de tarjeta:" required>
                         <!-- <input type="text" id="cardholder" name="cardholder" placeholder="Nombre del titular de la tarjeta:"> -->
-                        <input type="text" id="cvv" name="cvv" pattern="\d{3}" maxlength="3" placeholder="CVV">
-                        <input type="text" id="expiry" name="expiry" pattern="\d{2}/\d{2}" maxlength="5" placeholder="MM/AA">
+                        <input type="text" id="cvv" name="cvv" pattern="\d{3}" maxlength="3" placeholder="CVV" required>
+                        <input type="text" id="expiry" name="expiry" pattern="\d{2}/\d{2}" maxlength="5" placeholder="MM/AA" required>
                     </div>
                     <div class="step-buttons">
                         <button type="button" onclick="prevStep()">Regresar</button>
@@ -193,10 +193,10 @@
                     <p>Precio desde</p>
                     <div class="prices">
                         <p>USD
-                            <span>25.00</span>
+                            <span>6.00</span>
                         </p>
                         <p>PEN
-                            <span>30.00</span>
+                            <span>25.00</span>
                         </p>
                     </div>
                 </div>
@@ -206,20 +206,20 @@
         <div class="destino-card">
             <img src="https://firebasestorage.googleapis.com/v0/b/ponticloud.appspot.com/o/images%2Faba99014-7316-4b40-9027-a0fe0041cce2.png?alt=media&token=56945636-faaf-43ef-be2f-7e7d7ddef712" alt="">
             <div class="destino-card-content">
-                <h4>Ayacucho</h4>
+                <h4>Huanta</h4>
                 <p>Salida todo los días</p>
                 <div class="badge">
                     <span>Economy</span>
-                    <span>2 horas!</span>
+                    <span>1 horas! aprox</span>
                 </div>
                 <div class="price">
                     <p>Precio desde</p>
                     <div class="prices">
                         <p>USD
-                            <span>25.00</span>
+                            <span>4.00</span>
                         </p>
                         <p>PEN
-                            <span>30.00</span>
+                            <span>12.00</span>
                         </p>
                     </div>
                 </div>
@@ -229,20 +229,20 @@
         <div class="destino-card">
             <img src="https://diariocorreo.pe/resizer/0gVpgM6X3kOBIUwZiniyIn5SHyM=/980x0/smart/filters:format(jpeg):quality(75)/arc-anglerfish-arc2-prod-elcomercio.s3.amazonaws.com/public/MXLJGFQPO5HDVBCGRQAHXA55HM.jpg" alt="">
             <div class="destino-card-content">
-                <h4>Ayacucho</h4>
+                <h4>Pichari Pronto</h4>
                 <p>Salida todo los días</p>
                 <div class="badge">
                     <span>Economy</span>
-                    <span>2 horas!</span>
+                    <span>5 horas! Aprox</span>
                 </div>
                 <div class="price">
                     <p>Precio desde</p>
                     <div class="prices">
                         <p>USD
-                            <span>25.00</span>
+                            <span>27.00</span>
                         </p>
                         <p>PEN
-                            <span>30.00</span>
+                            <span>52.00</span>
                         </p>
                     </div>
                 </div>
