@@ -11,8 +11,8 @@ document.getElementById('toLocation').addEventListener('change', updateSeats);
 document.getElementById('travelDate').addEventListener('change', updateSeats);
 document.querySelectorAll('.time-button').forEach(button => {
     button.addEventListener('click', function() {
-        document.querySelectorAll('.time-button').forEach(b => b.classList.remove('selected'));
-        this.classList.add('selected');
+        document.querySelectorAll('.time-button').forEach(b => b.classList.remove('time-button-select'));
+        this.classList.add('time-button-select');
         document.getElementById('travelTimeInput').value = this.getAttribute('data-time');
         updateSeats();
     });

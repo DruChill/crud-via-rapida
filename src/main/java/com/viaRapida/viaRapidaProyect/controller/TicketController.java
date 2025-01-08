@@ -64,7 +64,8 @@ public class TicketController {
         }
         return 0.0;
     }
-        @GetMapping("/buscarMiTicket")
+    
+    @GetMapping("/buscarMiTicket")
     public String buscarMiTicket(@RequestParam(value = "dni", required = false) String dni, Model model) {
         List<Ticket> tickets = List.of();
         if (dni != null && !dni.isEmpty()) {
@@ -72,5 +73,10 @@ public class TicketController {
         }
         model.addAttribute("tickets", tickets);
         return "buscarMiTicket";
+    }
+
+    @GetMapping("/comentarios")
+    public String Comentarios() {
+        return "Comentario";
     }
 }

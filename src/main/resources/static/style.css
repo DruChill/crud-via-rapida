@@ -23,7 +23,7 @@ body {
 header {
     display: flex;
     justify-content: space-around;
-    padding: 1rem;
+    padding: 2rem;
     background-color: var(--secondary-color);
     color: var(--primary-color);
 }
@@ -32,13 +32,16 @@ header nav {
     gap: 12px;
 }
 
-header nav a {
-    color: var(--primary-color);
-    text-decoration: none;
-    
+header nav ul {
+    list-style: none;
+    display: flex;
+    gap: .6rem;
 }
 
-
+header nav ul li a {
+    text-decoration: none;
+    color: var(--primary-color);
+}
 
 
 #ticketForm {
@@ -79,10 +82,13 @@ header nav a {
 
 .time-button:hover {
     background-color: var(--secondary-color);
-    color: var(--primary-color);
-    
+    color: var(--primary-color); 
 }
 
+.time-button-select {
+    background-color: var(--secondary-color);
+    color: var(--primary-color); 
+}
 
 .hero__container {
     padding: 2rem;
@@ -97,6 +103,7 @@ header nav a {
     max-width: 500px;
     margin: 1rem auto;
     text-align: center;
+    font-size: 1.4rem;
 }
 
 input, select {
@@ -145,12 +152,6 @@ input::placeholder {
     transition: background-color 0.3s ease;
 }
 
-/* hover
-.step-buttons button:hover {
-    background-color: darken(var(--secondary-color), 100%);
-}
- */
-
 .seat {
     cursor: pointer;
     font-size: 24px;
@@ -170,7 +171,7 @@ input::placeholder {
     justify-content: center;
     align-items: center;
     gap: 2rem;
-    margin-top: 2rem;
+    margin-top: 3rem;
 }
 
 .section-cards a {
@@ -197,6 +198,12 @@ input::placeholder {
     padding: 2rem;
 }
 
+.hero__destinos h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin: 2rem;
+}
+
 
 .destinos {
     display: flex;
@@ -208,10 +215,110 @@ input::placeholder {
 .destino-card {
     background-color: var(--primary-color);
     box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
-
+    border-radius: 0 0 1rem 1rem;
 }
 
 .destino-card img {
     width: 100%;
-    border-radius: 0 1rem;
+    border-radius: 1rem 1rem 0 0;
 }
+
+.destino-card-content {
+    padding: 1rem;
+}
+
+.destino-card-content h4 {
+    font-size: 1.2rem;
+}
+
+.destino-card-content p {
+    font-size: 1rem;
+    margin: .6rem 0;
+}
+
+.destino-card-content .badge {
+    margin: 1rem 0;
+}
+
+.destino-card-content .badge span {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+
+    padding: .2rem 1rem;
+    border-radius: .5rem;
+}
+
+.destino-card-content .badge .badge-active {
+    background-color: rgb(255, 196, 0);
+    color: var(--primary-color);
+
+    padding: .2rem 1rem;
+    border-radius: .5rem;
+}
+
+.destino-card-content .price > p {
+    font-weight: 100;
+}
+
+.destino-card-content .prices > p {
+    font-weight: 100;
+}
+
+.destino-card-content .prices > p span {
+    font-weight: 500;
+}
+
+.hero__img img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    object-position: top;
+    padding: 1.7rem;
+}
+
+footer {
+    display: flex;
+    justify-content: space-around;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    text-align: center;
+    padding: 2rem 0;
+}
+footer .columna h5 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+footer .columna h5, p{
+    text-align: start;
+    margin-bottom: 1rem;
+}
+
+footer .columna p:hover {
+    color: var(--secondary-color);
+    cursor: pointer;
+}
+
+
+
+@media only screen and (max-width: 768px) {
+
+    header {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+    }
+
+
+    .section-cards {
+
+        flex-wrap: wrap;
+    }
+
+    .destinos {
+        flex-direction: column;
+    }
+
+
+}
+  

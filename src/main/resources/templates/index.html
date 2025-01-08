@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Compra de Boletos</title>
+    <title>Vía Rápida - Compra de boletos en linea</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
     <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="/src/main/resources/static/style.css">
@@ -13,9 +13,11 @@
 <header>
     <img src="" alt="logo-de-la-empresa">
     <nav>
-        <a href="/">Inicio</a>
-        <a href="#">Soporte</a>
-        <a href="#">Admin</a>
+        <ul>
+            <li><a href="/comentarios">Soporte</a></li>
+            <li><a href="/login">Administrador</a></li>
+            <li><a href="/buscarMiTicket">Buscar Boleto</a></li>
+        </ul>
     </nav>
 </header>
 
@@ -23,8 +25,8 @@
 <section class="hero__container">
     <div class="form-container">
         <div class="hero__text">
-            <h1>Compra de Boletos</h1>
-            <p>¡Reserva tu boleto ahora!</p>
+            <h1>Vía Rápida</h1>
+            <p>¡Compra tu boleto ahora!</p>
         </div>
         <div>
             <form id="ticketForm" action="/buyTicket" method="post">
@@ -124,21 +126,26 @@
     <div class="section-cards">
         <a href="#">
             <div class="card">
-                <h3>Buscar ticket</h3>
-                <i class="ti ti-search"></i>
+                <h3>Viajes: 348</h3>
+                <i class="ti ti-gps"></i>
             </div>
         </a>
         <div class="card">
+            <h3>Usuarios: 504</h3>
+            <i class="ti ti-users"></i>
+        </div>
+        <div class="card">
+            <h3>Carros: 48</h3>
+            <i class="ti ti-car"></i>
+        </div>
+        <div class="card">
             <h3>Atención al cliente</h3>
-            <i class="ti ti-search"></i>
-        </div>
-        <div class="card">
-            <h3>Administrador</h3>
-            <i class="ti ti-search"></i>
-        </div>
-        <div class="card">
-            <h3>Buscar ticket</h3>
-            <i class="ti ti-search"></i>
+            <div>
+                <i class="ti ti-star"></i>
+                <i class="ti ti-star"></i>
+                <i class="ti ti-star"></i>
+                <i class="ti ti-star"></i>
+            </div>
         </div>
     </div>
 </section>
@@ -147,47 +154,107 @@
     <div class="destinos">
         <div class="destino-card">
             <img src="https://denomades-blog.imgix.net/blog/wp-content/uploads/2020/09/13172228/arco-ayacucho.jpg?auto=compress%2Cformat&ixlib=php-3.3.1" alt="img-destino">
-            <h4>Ayacucho</h4>
-            <p>Precio: 25.00</p>
-            <div class="badge">
-                <span>Economy</span>
-                <span>2 horas!</span>
+            <div class="destino-card-content">
+                <h4>Ayacucho</h4>
+                <p>Salida todo los días</p>
+                <div class="badge">
+                    <span>Economy</span>
+                    <span class="badge-active">2 horas!</span>
+                </div>
+                <div class="price">
+                    <p>Precio desde</p>
+                    <div class="prices">
+                        <p>USD
+                            <span>25.00</span>
+                        </p>
+                        <p>PEN
+                            <span>30.00</span>
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="destino-card">
-            <img src="https://denomades-blog.imgix.net/blog/wp-content/uploads/2020/09/13172228/arco-ayacucho.jpg?auto=compress%2Cformat&ixlib=php-3.3.1" alt="img-destino">
-            <h4>Ayacucho</h4>
-            <p>Precio: 25.00</p>
-            <div class="badge">
-                <span>Economy</span>
-                <span>2 horas!</span>
-            </div>
-        </div>
+
         <div class="destino-card">
             <img src="https://denomades-blog.imgix.net/blog/wp-content/uploads/2020/09/13172228/arco-ayacucho.jpg?auto=compress%2Cformat&ixlib=php-3.3.1" alt="img-destino">
             <div class="destino-card-content">
                 <h4>Ayacucho</h4>
-                <p>Precio: 25.00</p>
+                <p>Salida todo los días</p>
                 <div class="badge">
                     <span>Economy</span>
                     <span>2 horas!</span>
                 </div>
+                <div class="price">
+                    <p>Precio desde</p>
+                    <div class="prices">
+                        <p>USD
+                            <span>25.00</span>
+                        </p>
+                        <p>PEN
+                            <span>30.00</span>
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
+
         <div class="destino-card">
             <img src="https://denomades-blog.imgix.net/blog/wp-content/uploads/2020/09/13172228/arco-ayacucho.jpg?auto=compress%2Cformat&ixlib=php-3.3.1" alt="img-destino">
             <div class="destino-card-content">
                 <h4>Ayacucho</h4>
-                <p>Precio: 25.00</p>
+                <p>Salida todo los días</p>
                 <div class="badge">
                     <span>Economy</span>
                     <span>2 horas!</span>
+                </div>
+                <div class="price">
+                    <p>Precio desde</p>
+                    <div class="prices">
+                        <p>USD
+                            <span>25.00</span>
+                        </p>
+                        <p>PEN
+                            <span>30.00</span>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+<section class="hero__img">
+    <img src="https://scontent.flim6-4.fna.fbcdn.net/v/t1.6435-9/82578020_10157114588942400_3220128180870316032_n.png?_nc_cat=108&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeGczux6YA2IfhVT2KSXPRzlHN3Wdl8bWjYc3dZ2XxtaNk0gx20PdGPB-5ZrqJqX5GOa3fPAUzl3cyAV5bO0Uo-g&_nc_ohc=L1xkMI5O2rEQ7kNvgE8UwDY&_nc_oc=AdhM2XLAMJxuk0lh5OJMjJUjFwwYtoYMAJ4uPEAgNEainhakfqhY981mS1HYrbKZol4&_nc_zt=23&_nc_ht=scontent.flim6-4.fna&_nc_gid=AeXrJVdD86yph8Ls7xaMo5y&oh=00_AYApEBw7Gehm6SIifmv4mKvFORoIJ7MRppcDgMAGRoGx6A&oe=67A40C82" alt="img-hero">
+</section>
 </main>
+<footer>
+    <div class="columna">
+        <h5>Vía Rápida</h5>
+        <p>Inicio</p>
+        <p>Destinos</p>
+        <p>Soporte</p>
+        <p>Administrador</p>
+    </div>
+    <div class="columna">
+        <h5>Soporte</h5>
+        <p>Contáctanos</p>
+        <p>Preguntas Frecuentes</p>
+        <p>Políticas de Privacidad</p>
+    </div>
+    <div class="columna">
+        <h5>Redes Sociales</h5>
+        <p>Facebook</p>
+        <p>Instagram</p>
+        <p>Twitter</p>
+    </div>
+
+    <div class="columna">
+        <h5>Descarga Nuestra App</h5>
+        <img src="" alt="AppStore">
+        <img src="" alt="PlayStore">
+    </div>
+
+</footer>
+
 </body>
 <script>
     let currentStep = 0;
