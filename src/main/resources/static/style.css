@@ -23,6 +23,7 @@ body {
 header {
     display: flex;
     justify-content: space-around;
+    align-items: center;
     padding: 2rem;
     background-color: var(--secondary-color);
     color: var(--primary-color);
@@ -43,6 +44,12 @@ header nav ul li a {
     color: var(--primary-color);
 }
 
+.texto-principal {
+    text-align: center;
+    font-size: 1.2rem;
+    margin: 2rem;
+    color: var(--bg-color);
+}
 
 #ticketForm {
     background: #FFFFFF;
