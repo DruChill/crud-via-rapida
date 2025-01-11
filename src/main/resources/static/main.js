@@ -42,3 +42,30 @@ function updateSeats() {
             });
     }
 }
+
+function validateStep(step) {
+    const inputs = steps[step].querySelectorAll('input, select');
+    for (let input of inputs) {
+        if (!input.checkValidity()) {
+            input.reportValidity();
+            return false;
+        }
+    }
+    return true;
+}
+
+function nextStep() {
+    if (validateStep(currentStep)) {
+        if (currentStep < steps.length - 1) {
+            currentStep++;
+            showStep(currentStep);
+        }
+    }
+}
+
+function prevStep() {
+    if (currentStep > 0) {
+        currentStep--;
+        showStep(currentStep);
+    }
+}
