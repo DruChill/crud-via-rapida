@@ -84,6 +84,88 @@ Apoya este proyecto convirtiéndote en [patrocinador](https://opencollective.com
 
 <table>
   <tbody>
-    <!-- Añadir patrocinadores de manera similar -->
+    <tr>
+      <td align="center" valign="middle">
+        <a href="https://discord.com/?utm_source=pnpm&utm_medium=readme" target="_blank">
+          <picture>
+            <source media="(prefers-color-scheme: light)" srcset="https://pnpm.io/img/users/discord.svg" />
+            <source media="(prefers-color-scheme: dark)" srcset="https://pnpm.io/img/users/discord_light.svg" />
+            <img src="https://pnpm.io/img/users/discord.svg" width="220" alt="Discord" />
+          </picture>
+        </a>
+      </td>
+      <td align="center" valign="middle">
+        <a href="https://prisma.io/?utm_source=pnpm&utm_medium=readme" target="_blank">
+          <picture>
+            <source media="(prefers-color-scheme: light)" srcset="https://pnpm.io/img/users/prisma.svg" />
+            <source media="(prefers-color-scheme: dark)" srcset="https://pnpm.io/img/users/prisma_light.svg" />
+            <img src="https://pnpm.io/img/users/prisma.svg" width="180" alt="Prisma" />
+          </picture>
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td align="center" valign="middle">
+        <a href="https://uscreen.de/?utm_source=pnpm&utm_medium=readme" target="_blank">
+          <picture>
+            <source media="(prefers-color-scheme: light)" srcset="https://pnpm.io/img/users/uscreen.svg" />
+            <source media="(prefers-color-scheme: dark)" srcset="https://pnpm.io/img/users/uscreen_light.svg" />
+            <img src="https://pnpm.io/img/users/uscreen.svg" width="180" alt="u|screen" />
+          </picture>
+        </a>
+      </td>
+      <td align="center" valign="middle">
+        <a href="https://www.jetbrains.com/?utm_source=pnpm&utm_medium=readme" target="_blank">
+          <picture>
+            <source media="(prefers-color-scheme: light)" srcset="https://pnpm.io/img/users/jetbrains.svg" />
+            <source media="(prefers-color-scheme: dark)" srcset="https://pnpm.io/img/users/jetbrains.svg" />
+            <img src="https://pnpm.io/img/users/jetbrains.svg" width="180" alt="JetBrains" />
+          </picture>
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td align="center" valign="middle">
+        <a href="https://nx.dev/?utm_source=pnpm&utm_medium=readme" target="_blank">
+          <picture>
+            <source media="(prefers-color-scheme: light)" srcset="https://pnpm.io/img/users/nx.svg" />
+            <source media="(prefers-color-scheme: dark)" srcset="https://pnpm.io/img/users/nx_light.svg" />
+            <img src="https://pnpm.io/img/users/nx.svg" width="120" alt="Nx" />
+          </picture>
+        </a>
+      </td>
+      <td align="center" valign="middle">
+        <a href="https://coderabbit.ai/?utm_source=pnpm&utm_medium=readme" target="_blank">
+          <picture>
+            <source media="(prefers-color-scheme: light)" srcset="https://pnpm.io/img/users/coderabbit.svg" />
+            <source media="(prefers-color-scheme: dark)" srcset="https://pnpm.io/img/users/coderabbit_light.svg" />
+            <img src="https://pnpm.io/img/users/coderabbit.svg" width="220" alt="CodeRabbit" />
+          </picture>
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td align="center" valign="middle">
+        <a href="https://route4me.com/?utm_source=pnpm&utm_medium=readme" target="_blank">
+          <img src="https://pnpm.io/img/users/route4me.svg" width="220" alt="Route4Me" />
+        </a>
+      </td>
+      <td align="center" valign="middle">
+        <a href="https://workleap.com/?utm_source=pnpm&utm_medium=readme" target="_blank">
+          <picture>
+            <source media="(prefers-color-scheme: light)" srcset="https://pnpm.io/img/users/workleap.svg" />
+            <source media="(prefers-color-scheme: dark)" srcset="https://pnpm.io/img/users/workleap_light.svg" />
+            <img src="https://pnpm.io/img/users/workleap.svg" width="190" alt="Workleap" />
+          </picture>
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td align="center" valign="middle">
+        <a href="https://canva.com/?utm_source=pnpm&utm_medium=readme" target="_blank">
+          <img src="https://pnpm.io/img/users/canva.svg" width="120" alt="Canva" />
+        </a>
+      </td>
+    </tr>
   </tbody>
 </table>
