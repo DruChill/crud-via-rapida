@@ -6,7 +6,7 @@
 [Mariana Pecho B.](https://pnpm.io/it/)
 
 <picture>
-  <img src="https://raw.githubusercontent.com/DruChill/crud-via-rapida/ebfea398ba6ee096a0fe10ab3f9f7f49c4bd58a8/src/main/resources/static/banner.png" alt="banner-project" />
+  <img src="https://github.com/DruChill/crud-via-rapida/blob/main/src/main/resources/static/banner.png?raw=true" alt="banner-project" />
 </picture>
 
 ---
