@@ -123,9 +123,9 @@
                 <!-- paso 5 datos del pasajero -->
                 <div class="step">
                     <p>Datos del pasajero:</p>
-                    <input type="text" id="passengerName" name="passengerName" placeholder="Nombre del Pasajero:" required>
+                    <input type="text" id="passengerName" name="passengerName" placeholder="Nombre del Pasajero:" pattern="[A-Za-z\s]+" required title="Solo se permiten letras">
         
-                    <input pattern="\d{8}" maxlength="8" type="text" id="dni" name="dni" placeholder="Ingrese su DNI" required>
+                    <input pattern="\d{8}" maxlength="8" type="text" id="dni" name="dni" placeholder="Ingrese su DNI" inputmode="numeric" required title="Solo se permiten números y deben ser de 8 dígitos">
                     <div class="step-buttons">
                         <button type="button" onclick="prevStep()">Regresar</button>
                         <button type="button" onclick="nextStep()">Siguiente</button>
