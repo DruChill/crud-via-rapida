@@ -1,70 +1,23 @@
 package com.viaRapida.viaRapidaProyect.controller;
-
+ 
 import com.viaRapida.viaRapidaProyect.model.Ticket;
 import com.viaRapida.viaRapidaProyect.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
+ 
 import java.util.List;
-
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+ 
 @Controller
 public class TicketController {
+ 
     @Autowired
     private TicketService ticketService;
-
-    @PostMapping("/buyTicket")
-    public String buyTicket(@RequestParam("passengerName") String passengerName,
-                            @RequestParam("dni") String dni,
-                            @RequestParam("fromLocation") String fromLocation,
-                            @RequestParam("toLocation") String toLocation,
-                            @RequestParam("travelDate") String travelDate,
-                            @RequestParam("travelTime") String travelTime,
-                            @RequestParam("seatNumber") String seatNumber,
-                            Model model) {
-        try {
-            LocalDate parsedDate = LocalDate.parse(travelDate);
-            Ticket ticket = new Ticket();
-            ticket.setPassengerName(passengerName);
-            ticket.setDni(dni);
-            ticket.setFromLocation(fromLocation);
-            ticket.setToLocation(toLocation);
-            ticket.setTravelDate(parsedDate);
-            ticket.setTravelTime(travelTime);
-            ticket.setSeatNumber(seatNumber);
-
-            // Calcular el precio basado en los destinos seleccionados
-            double price = calculatePrice(fromLocation, toLocation);
-            ticket.setPrice(price);
-
-            ticketService.saveTicket(ticket);
-            model.addAttribute("ticket", ticket);
-            return "confirmation";
-        } catch (DateTimeParseException e) {
-            // Manejar el error de formato de fecha
-            return "redirect:/?error=invalidDate";
-        }
-    }
-
-        private double calculatePrice(String fromLocation, String toLocation) {
-        if ((fromLocation.equals("Huamanga") && toLocation.equals("San Miguel")) ||
-            (fromLocation.equals("San Miguel") && toLocation.equals("Huamanga"))) {
-            return 25.0;
-        } else if ((fromLocation.equals("Huamanga") && toLocation.equals("Huanta")) ||
-                   (fromLocation.equals("Huanta") && toLocation.equals("Huamanga"))) {
-            return 10.0;
-        } else if ((fromLocation.equals("Huanta") && toLocation.equals("San Miguel")) ||
-                   (fromLocation.equals("San Miguel") && toLocation.equals("Huanta"))) {
-            return 15.0;
-        }
-        return 0.0;
-    }
-    
+ 
     @GetMapping("/buscarMiTicket")
     public String buscarMiTicket(@RequestParam(value = "dni", required = false) String dni, Model model) {
         List<Ticket> tickets = List.of();
@@ -74,9 +27,16 @@ public class TicketController {
         model.addAttribute("tickets", tickets);
         return "buscarMiTicket";
     }
-
+ 
     @GetMapping("/comentarios")
     public String Comentarios() {
         return "Comentario";
+    }
+    
+    @PostMapping("/buyTicket")
+    public String buyTicket(@ModelAttribute Ticket ticket, Model model) {
+        ticketService.saveTicket(ticket);
+        model.addAttribute("ticket", ticket);
+        return "confirmation";
     }
 }
