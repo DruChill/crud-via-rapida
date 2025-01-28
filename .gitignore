@@ -36,3 +36,7 @@ build/
 .env
 
 /src/main/resources/static/videoplayback.webm
+
+#Aplication properties
+
+/src/main/resources/application.properties
