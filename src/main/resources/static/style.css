@@ -106,11 +106,7 @@ header nav ul li a {
     color: var(--primary-color); 
 }
 
-/* .hero__container {
-    padding: 2rem;
-    background-image: url('https://www.latamairlines.com/content/dam/latamxp/sites/destinos/chile/deals/scl-deals.jpg');
-    background-size: cover;
-} */
+
 
 .hero__text {
     color: var(--primary-color);
