@@ -1,9 +1,9 @@
 # Vía Rápida - Desarrollado por estudiantes
 
-[Andru Ramirez R:](https://pnpm.io/zh/) | 
-[Jorge Altamirano](https://pnpm.io/ja/) | 
-[Junior Javier Magallanes R.](https://pnpm.io/ko/) | 
-[Mariana Pecho B.](https://pnpm.io/it/)
+[Andru Ramirez R:](https://github.com/DruChill) | 
+[Jorge Altamirano](https://github.com/JoorgeMoon) | 
+[Junior Javier Magallanes R.](https://github.com/JavierMagallanes-Dev) | 
+[Mariana Pecho B.](https://github.com/MarianPecho)
 
 <picture>
   <img src="https://github.com/DruChill/crud-via-rapida/blob/main/src/main/resources/static/banner.png?raw=true" alt="banner-project" />
