@@ -32,3 +32,15 @@
 - **Seguridad.** Transacciones protegidas con cifrado de alto nivel y opciones de pago confiables (tarjetas de crédito, PayPal, etc.).
 - **Historial y control.** Acceso a tu historial de pagos y facturación, además de la opción de realizar seguimientos de tu saldo y actividades.
 - **Interfaz sencilla.** Diseño intuitivo que reduce los tiempos de espera y mejora la experiencia del usuario.
+---
+
+## Cómo usar? solo necesitas lo siguiente.
+  - Tu application.properties:
+```
+spring.datasource.url=jdbc:mysql://localhost:3306/YOUR_DATABASE_NAME
+spring.datasource.username=YOUR_USERNAME
+spring.datasource.password=YOUR_PASSWORD
+spring.jpa.hibernate.ddl-auto=updatess
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
+```
