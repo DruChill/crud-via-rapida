@@ -1,23 +1,28 @@
 package com.viaRapida.viaRapidaProyect.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
-public class Destination {
+@Table(name = "destinos")
+public class Destino {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    @Column(nullable = false, length = 100)
     private String name;
+    
+    @Column(length = 255)
     private String description;
-    private double price; // Nuevo campo
+    
+    @Column(nullable = false, precision = 10, scale = 2)
+    private BigDecimal price;
 
-    public Destination() {
+    public Destino() {
     }
 
-    public Destination(Long id, String name, String description, double price) {
+    public Destino(Long id, String name, String description, BigDecimal price) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -50,11 +55,20 @@ public class Destination {
         this.description = description;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+    
+    // Métodos de conveniencia para compatibilidad
+    public double getPriceAsDouble() {
+        return price != null ? price.doubleValue() : 0.0;
+    }
+    
+    public void setPrice(double price) {
+        this.price = BigDecimal.valueOf(price);
     }
 }

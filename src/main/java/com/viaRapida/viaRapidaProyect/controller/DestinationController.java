@@ -1,6 +1,6 @@
 package com.viaRapida.viaRapidaProyect.controller;
 
-import com.viaRapida.viaRapidaProyect.model.Destination;
+import com.viaRapida.viaRapidaProyect.model.Destino;
 import com.viaRapida.viaRapidaProyect.model.Ticket;
 import com.viaRapida.viaRapidaProyect.service.DestinationService;
 import com.viaRapida.viaRapidaProyect.service.TicketService;
@@ -29,7 +29,7 @@ public class DestinationController {
                                @RequestParam(required = false) String toLocation,
                                @RequestParam(required = false) String travelDate,
                                @RequestParam(required = false) String travelTime) {
-        List<Destination> listDestinations = destinationService.getAllDestinations();
+        List<Destino> listDestinations = destinationService.getAllDestinations();
         model.addAttribute("listDestinations", listDestinations);
 
         List<String> purchasedSeats = List.of();

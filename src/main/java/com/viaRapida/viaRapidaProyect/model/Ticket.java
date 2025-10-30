@@ -1,24 +1,65 @@
 package com.viaRapida.viaRapidaProyect.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "tickets")
 public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    @Column(name = "passenger_name", nullable = false, length = 100)
     private String passengerName;
+    
+    @Column(nullable = false, length = 20)
     private String dni;
+    
+    @Column(name = "from_location", nullable = false, length = 100)
     private String fromLocation;
+    
+    @Column(name = "to_location", nullable = false, length = 100)
     private String toLocation;
+    
+    @Column(name = "travel_date", nullable = false)
     private LocalDate travelDate;
+    
+    @Column(name = "travel_time", length = 10)
     private String travelTime;
+    
+    @Column(name = "seat_number", length = 10)
     private String seatNumber;
-    private double price; // Nuevo campo
+    
+    @Column(nullable = false, precision = 10, scale = 2)
+    private BigDecimal price;
+    
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+    
+    // Relaciones opcionales para compatibilidad con el nuevo sistema
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "reserva_id")
+    private Reserva reserva;
+
+    public Ticket() {
+        this.createdAt = LocalDateTime.now();
+    }
+
+    public Ticket(String passengerName, String dni, String fromLocation, String toLocation, 
+                  LocalDate travelDate, String travelTime, String seatNumber, BigDecimal price) {
+        this.passengerName = passengerName;
+        this.dni = dni;
+        this.fromLocation = fromLocation;
+        this.toLocation = toLocation;
+        this.travelDate = travelDate;
+        this.travelTime = travelTime;
+        this.seatNumber = seatNumber;
+        this.price = price;
+        this.createdAt = LocalDateTime.now();
+    }
 
     // Getters and setters
 
@@ -86,11 +127,36 @@ public class Ticket {
         this.seatNumber = seatNumber;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Reserva getReserva() {
+        return reserva;
+    }
+
+    public void setReserva(Reserva reserva) {
+        this.reserva = reserva;
+    }
+    
+    // Métodos de compatibilidad
+    public double getPriceAsDouble() {
+        return price != null ? price.doubleValue() : 0.0;
+    }
+    
+    public void setPrice(double price) {
+        this.price = BigDecimal.valueOf(price);
     }
 }

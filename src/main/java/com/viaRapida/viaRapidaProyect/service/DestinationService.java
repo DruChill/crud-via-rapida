@@ -1,7 +1,7 @@
 package com.viaRapida.viaRapidaProyect.service;
 
-import com.viaRapida.viaRapidaProyect.model.Destination;
-import com.viaRapida.viaRapidaProyect.repository.DestinationRepository;
+import com.viaRapida.viaRapidaProyect.model.Destino;
+import com.viaRapida.viaRapidaProyect.repository.DestinoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,13 +10,14 @@ import java.util.List;
 @Service
 public class DestinationService {
     @Autowired
-    private DestinationRepository destinationRepository;
+    private DestinoRepository destinoRepository;
 
-    public List<Destination> getAllDestinations() {
-        return destinationRepository.findAll();
+    public List<Destino> getAllDestinations() {
+        return destinoRepository.findAll();
     }
 
-    public Destination getDestinationByName(String name) {
-        return destinationRepository.findByName(name);
+    public Destino getDestinationByName(String name) {
+        List<Destino> destinos = destinoRepository.findByNameContainingIgnoreCase(name);
+        return destinos.isEmpty() ? null : destinos.get(0);
     }
 }
