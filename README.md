@@ -21,11 +21,17 @@
 ## Cómo usar? solo necesitas lo siguiente.
   - Tu application.properties:
 ```
-spring.datasource.url=jdbc:mysql://localhost:3306/YOUR_DATABASE_NAME
-spring.datasource.username=YOUR_USERNAME
-spring.datasource.password=YOUR_PASSWORD
-spring.jpa.hibernate.ddl-auto=updatess
+spring.datasource.url=jdbc:mysql://localhost:3306/web_via
+spring.datasource.username=${SPRING_DATASOURCE_USERNAME}
+spring.datasource.password=${SPRING_DATASOURCE_PASSWORD}
+spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
+```
+---
+## Crear .env en la raiz del proyecto:
+```
+SPRING_DATASOURCE_USERNAME=tuUsuario
+SPRING_DATASOURCE_PASSWORD=tuContraseña
 ```
 ❤️ ¿Te gusta el proyecto? [Donar](https://www.paypal.me/druchill).
