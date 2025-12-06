@@ -65,6 +65,43 @@ public class TicketServiceImpl implements TicketService {
         return ticketRepository.save(ticket);
     }
     
+    // Método para actualizar ticket desde DTO
+    public Ticket updateTicketFromRequest(Long ticketId, TicketRequest request) {
+        Ticket ticket = ticketRepository.findById(ticketId)
+                .orElseThrow(() -> new RuntimeException("Ticket no encontrado"));
+        
+        // Actualizar usuario si es necesario
+        User user = userRepository.findByDni(request.getDni())
+                .orElseGet(() -> {
+                    User newUser = new User();
+                    newUser.setDni(request.getDni());
+                    newUser.setName(request.getName());
+                    newUser.setEmail(request.getEmail());
+                    newUser.setPhone(request.getPhone());
+                    return userRepository.save(newUser);
+                });
+        
+        // Obtener destinos
+        Destination fromDestination = destinationRepository.findById(request.getFromDestinationId())
+                .orElseThrow(() -> new RuntimeException("Destino origen no encontrado"));
+        Destination toDestination = destinationRepository.findById(request.getToDestinationId())
+                .orElseThrow(() -> new RuntimeException("Destino destino no encontrado"));
+        
+        // Calcular precio automáticamente
+        double calculatedPrice = calculatePriceByDestinations(fromDestination, toDestination);
+        
+        // Actualizar ticket
+        ticket.setUser(user);
+        ticket.setFromDestination(fromDestination);
+        ticket.setToDestination(toDestination);
+        ticket.setTravelDate(request.getTravelDate());
+        ticket.setTravelTime(request.getTravelTime());
+        ticket.setSeatNumber(request.getSeatNumber());
+        ticket.setPrice(calculatedPrice);
+        
+        return ticketRepository.save(ticket);
+    }
+    
     // Método para calcular precio basado en destinos
     private double calculatePriceByDestinations(Destination from, Destination to) {
         // Lógica simple: suma de los precios base dividido entre 2 + 5 soles

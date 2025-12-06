@@ -5,16 +5,15 @@ import com.viaRapida.viaRapidaProyect.dto.TicketRequest;
 import com.viaRapida.viaRapidaProyect.service.TicketService;
 import com.viaRapida.viaRapidaProyect.serviceImpl.TicketServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
  
 import java.util.List;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
  
-@Controller
+@RestController
+@RequestMapping("/api/tickets")
+@CrossOrigin(origins = "*")
 public class TicketController {
  
     @Autowired
@@ -22,31 +21,77 @@ public class TicketController {
     
     @Autowired
     private TicketServiceImpl ticketServiceImpl;
- 
-    @GetMapping("/buscarMiTicket")
-    public String buscarMiTicket(@RequestParam(value = "dni", required = false) String dni, Model model) {
-        List<Ticket> tickets = List.of();
-        if (dni != null && !dni.isEmpty()) {
-            tickets = ticketService.getTicketsByDni(dni);
+
+    @GetMapping
+    public ResponseEntity<List<Ticket>> getAllTickets() {
+        return ResponseEntity.ok(ticketService.getAllTickets());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Ticket> getTicketById(@PathVariable Long id) {
+        Ticket ticket = ticketService.getTicketById(id);
+        if (ticket != null) {
+            return ResponseEntity.ok(ticket);
         }
-        model.addAttribute("tickets", tickets);
-        return "buscarMiTicket";
+        return ResponseEntity.notFound().build();
     }
  
-    @GetMapping("/comentarios")
-    public String Comentarios() {
-        return "Comentario";
+    @GetMapping("/search")
+    public ResponseEntity<List<Ticket>> getTicketsByDni(@RequestParam String dni) {
+        List<Ticket> tickets = ticketService.getTicketsByDni(dni);
+        return ResponseEntity.ok(tickets);
     }
     
-    @PostMapping("/buyTicket")
-    public String buyTicket(@ModelAttribute TicketRequest ticketRequest, Model model) {
+    @PostMapping
+    public ResponseEntity<?> createTicket(@RequestBody TicketRequest ticketRequest) {
         try {
             Ticket ticket = ticketServiceImpl.createTicketFromRequest(ticketRequest);
-            model.addAttribute("ticket", ticket);
-            return "confirmation";
+            return ResponseEntity.status(HttpStatus.CREATED).body(ticket);
         } catch (Exception e) {
-            model.addAttribute("error", "Error al crear el ticket: " + e.getMessage());
-            return "index";
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(new ErrorResponse("Error al crear el ticket: " + e.getMessage()));
+        }
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateTicket(@PathVariable Long id, @RequestBody TicketRequest ticketRequest) {
+        try {
+            Ticket existingTicket = ticketService.getTicketById(id);
+            if (existingTicket == null) {
+                return ResponseEntity.notFound().build();
+            }
+            Ticket updatedTicket = ticketServiceImpl.updateTicketFromRequest(id, ticketRequest);
+            return ResponseEntity.ok(updatedTicket);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(new ErrorResponse("Error al actualizar el ticket: " + e.getMessage()));
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteTicket(@PathVariable Long id) {
+        Ticket ticket = ticketService.getTicketById(id);
+        if (ticket != null) {
+            ticketService.deleteTicketById(id);
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    // Clase interna para respuestas de error
+    static class ErrorResponse {
+        private String message;
+
+        public ErrorResponse(String message) {
+            this.message = message;
+        }
+
+        public String getMessage() {
+            return message;
+        }
+
+        public void setMessage(String message) {
+            this.message = message;
         }
     }
 }
