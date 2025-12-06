@@ -35,8 +35,10 @@ public class DestinationController {
         List<String> purchasedSeats = List.of();
         if (fromLocation != null && toLocation != null && travelDate != null && travelTime != null) {
             purchasedSeats = ticketService.getAllTickets().stream()
-                    .filter(ticket -> ticket.getFromLocation().equals(fromLocation))
-                    .filter(ticket -> ticket.getToLocation().equals(toLocation))
+                    .filter(ticket -> ticket.getFromDestination() != null && 
+                            ticket.getFromDestination().getName().equals(fromLocation))
+                    .filter(ticket -> ticket.getToDestination() != null && 
+                            ticket.getToDestination().getName().equals(toLocation))
                     .filter(ticket -> ticket.getTravelDate().equals(LocalDate.parse(travelDate)))
                     .filter(ticket -> ticket.getTravelTime().equals(travelTime))
                     .map(Ticket::getSeatNumber)

@@ -1,8 +1,13 @@
 package com.viaRapida.viaRapidaProyect.serviceImpl;
  
 import com.viaRapida.viaRapidaProyect.model.Ticket;
+import com.viaRapida.viaRapidaProyect.model.User;
+import com.viaRapida.viaRapidaProyect.model.Destination;
 import com.viaRapida.viaRapidaProyect.repository.TicketRepository;
+import com.viaRapida.viaRapidaProyect.repository.UserRepository;
+import com.viaRapida.viaRapidaProyect.repository.DestinationRepository;
 import com.viaRapida.viaRapidaProyect.service.TicketService;
+import com.viaRapida.viaRapidaProyect.dto.TicketRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
  
@@ -13,10 +18,48 @@ public class TicketServiceImpl implements TicketService {
  
     @Autowired
     private TicketRepository ticketRepository;
+    
+    @Autowired
+    private UserRepository userRepository;
+    
+    @Autowired
+    private DestinationRepository destinationRepository;
  
     @Override
     public void saveTicket(Ticket ticket) {
         ticketRepository.save(ticket);
+    }
+    
+    // Nuevo método para crear ticket desde DTO
+    public Ticket createTicketFromRequest(TicketRequest request) {
+        // Buscar o crear usuario
+        User user = userRepository.findByDni(request.getDni())
+                .orElseGet(() -> {
+                    User newUser = new User();
+                    newUser.setDni(request.getDni());
+                    newUser.setName(request.getName());
+                    newUser.setEmail(request.getEmail());
+                    newUser.setPhone(request.getPhone());
+                    return userRepository.save(newUser);
+                });
+        
+        // Obtener destinos
+        Destination fromDestination = destinationRepository.findById(request.getFromDestinationId())
+                .orElseThrow(() -> new RuntimeException("Destino origen no encontrado"));
+        Destination toDestination = destinationRepository.findById(request.getToDestinationId())
+                .orElseThrow(() -> new RuntimeException("Destino destino no encontrado"));
+        
+        // Crear ticket
+        Ticket ticket = new Ticket();
+        ticket.setUser(user);
+        ticket.setFromDestination(fromDestination);
+        ticket.setToDestination(toDestination);
+        ticket.setTravelDate(request.getTravelDate());
+        ticket.setTravelTime(request.getTravelTime());
+        ticket.setSeatNumber(request.getSeatNumber());
+        ticket.setPrice(request.getPrice());
+        
+        return ticketRepository.save(ticket);
     }
  
     @Override
@@ -36,20 +79,28 @@ public class TicketServiceImpl implements TicketService {
  
     @Override
     public List<Ticket> getTicketsByDni(String dni) {
-        return ticketRepository.findByDni(dni);
+        User user = userRepository.findByDni(dni).orElse(null);
+        if (user != null) {
+            return ticketRepository.findByUser(user);
+        }
+        return List.of();
     }
  
     @Override
     public double calculatePrice(String fromLocation, String toLocation) {
-        if ((fromLocation.equals("Huamanga") && toLocation.equals("San Miguel")) ||
-            (fromLocation.equals("San Miguel") && toLocation.equals("Huamanga"))) {
-            return 25.0;
-        } else if ((fromLocation.equals("Huamanga") && toLocation.equals("Huanta")) ||
-                   (fromLocation.equals("Huanta") && toLocation.equals("Huamanga"))) {
-            return 10.0;
-        } else if ((fromLocation.equals("Huanta") && toLocation.equals("San Miguel")) ||
-                   (fromLocation.equals("San Miguel") && toLocation.equals("Huanta"))) {
-            return 15.0;
+        // Este método ahora es simplificado - el precio viene de la tabla Destination
+        Destination from = destinationRepository.findAll().stream()
+                .filter(d -> d.getName().equals(fromLocation))
+                .findFirst()
+                .orElse(null);
+        Destination to = destinationRepository.findAll().stream()
+                .filter(d -> d.getName().equals(toLocation))
+                .findFirst()
+                .orElse(null);
+        
+        if (from != null && to != null) {
+            // Puedes implementar lógica más compleja aquí
+            return Math.abs(from.getPrice() - to.getPrice()) + 10.0;
         }
         return 0.0;
     }

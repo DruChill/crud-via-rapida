@@ -1,9 +1,6 @@
 package com.viaRapida.viaRapidaProyect.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -11,14 +8,23 @@ public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String passengerName;
-    private String dni;
-    private String fromLocation;
-    private String toLocation;
+    
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+    
+    @ManyToOne
+    @JoinColumn(name = "from_destination_id", nullable = false)
+    private Destination fromDestination;
+    
+    @ManyToOne
+    @JoinColumn(name = "to_destination_id", nullable = false)
+    private Destination toDestination;
+    
     private LocalDate travelDate;
     private String travelTime;
     private String seatNumber;
-    private double price; // Nuevo campo
+    private double price;
 
     // Getters and setters
 
@@ -30,36 +36,28 @@ public class Ticket {
         this.id = id;
     }
 
-    public String getPassengerName() {
-        return passengerName;
+    public User getUser() {
+        return user;
     }
 
-    public void setPassengerName(String passengerName) {
-        this.passengerName = passengerName;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public String getDni() {
-        return dni;
+    public Destination getFromDestination() {
+        return fromDestination;
     }
 
-    public void setDni(String dni) {
-        this.dni = dni;
+    public void setFromDestination(Destination fromDestination) {
+        this.fromDestination = fromDestination;
     }
 
-    public String getFromLocation() {
-        return fromLocation;
+    public Destination getToDestination() {
+        return toDestination;
     }
 
-    public void setFromLocation(String fromLocation) {
-        this.fromLocation = fromLocation;
-    }
-
-    public String getToLocation() {
-        return toLocation;
-    }
-
-    public void setToLocation(String toLocation) {
-        this.toLocation = toLocation;
+    public void setToDestination(Destination toDestination) {
+        this.toDestination = toDestination;
     }
 
     public LocalDate getTravelDate() {

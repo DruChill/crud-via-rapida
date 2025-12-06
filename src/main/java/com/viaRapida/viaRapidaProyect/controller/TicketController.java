@@ -1,7 +1,9 @@
 package com.viaRapida.viaRapidaProyect.controller;
  
 import com.viaRapida.viaRapidaProyect.model.Ticket;
+import com.viaRapida.viaRapidaProyect.dto.TicketRequest;
 import com.viaRapida.viaRapidaProyect.service.TicketService;
+import com.viaRapida.viaRapidaProyect.serviceImpl.TicketServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,9 @@ public class TicketController {
  
     @Autowired
     private TicketService ticketService;
+    
+    @Autowired
+    private TicketServiceImpl ticketServiceImpl;
  
     @GetMapping("/buscarMiTicket")
     public String buscarMiTicket(@RequestParam(value = "dni", required = false) String dni, Model model) {
@@ -34,9 +39,14 @@ public class TicketController {
     }
     
     @PostMapping("/buyTicket")
-    public String buyTicket(@ModelAttribute Ticket ticket, Model model) {
-        ticketService.saveTicket(ticket);
-        model.addAttribute("ticket", ticket);
-        return "confirmation";
+    public String buyTicket(@ModelAttribute TicketRequest ticketRequest, Model model) {
+        try {
+            Ticket ticket = ticketServiceImpl.createTicketFromRequest(ticketRequest);
+            model.addAttribute("ticket", ticket);
+            return "confirmation";
+        } catch (Exception e) {
+            model.addAttribute("error", "Error al crear el ticket: " + e.getMessage());
+            return "index";
+        }
     }
 }

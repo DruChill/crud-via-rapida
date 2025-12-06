@@ -1,7 +1,11 @@
 package com.viaRapida.viaRapidaProyect.controller;
 
 import com.viaRapida.viaRapidaProyect.model.Ticket;
+import com.viaRapida.viaRapidaProyect.model.Destination;
+import com.viaRapida.viaRapidaProyect.model.User;
 import com.viaRapida.viaRapidaProyect.service.TicketService;
+import com.viaRapida.viaRapidaProyect.service.DestinationService;
+import com.viaRapida.viaRapidaProyect.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +17,12 @@ public class AdminController {
 
     @Autowired
     private TicketService ticketService;
+    
+    @Autowired
+    private DestinationService destinationService;
+    
+    @Autowired
+    private UserService userService;
 
     private static final String ADMIN_USERNAME = "admin";
     private static final String ADMIN_PASSWORD = "password";
@@ -52,18 +62,41 @@ public class AdminController {
         }
         Ticket ticket = ticketService.getTicketById(id);
         model.addAttribute("ticket", ticket);
+        model.addAttribute("destinations", destinationService.getAllDestinations());
+        model.addAttribute("users", userService.getAllUsers());
         return "editTicket";
     }
 
     @PostMapping("/admin/edit/{id}")
     public String editTicket(@PathVariable("id") Long id,
-                             @ModelAttribute("ticket") Ticket ticket,
+                             @RequestParam("userId") Long userId,
+                             @RequestParam("fromDestinationId") Long fromDestinationId,
+                             @RequestParam("toDestinationId") Long toDestinationId,
+                             @RequestParam("travelDate") String travelDate,
+                             @RequestParam("travelTime") String travelTime,
+                             @RequestParam("seatNumber") String seatNumber,
+                             @RequestParam("price") double price,
                              HttpSession session) {
         if (session.getAttribute("admin") == null) {
             return "redirect:/login";
         }
-        ticket.setId(id);
-        ticketService.saveTicket(ticket);
+        
+        Ticket ticket = ticketService.getTicketById(id);
+        if (ticket != null) {
+            User user = userService.getUserById(userId).orElse(null);
+            Destination fromDest = destinationService.getDestinationById(fromDestinationId).orElse(null);
+            Destination toDest = destinationService.getDestinationById(toDestinationId).orElse(null);
+            
+            ticket.setUser(user);
+            ticket.setFromDestination(fromDest);
+            ticket.setToDestination(toDest);
+            ticket.setTravelDate(java.time.LocalDate.parse(travelDate));
+            ticket.setTravelTime(travelTime);
+            ticket.setSeatNumber(seatNumber);
+            ticket.setPrice(price);
+            
+            ticketService.saveTicket(ticket);
+        }
         return "redirect:/admin";
     }
 
