@@ -73,38 +73,49 @@
     <div class="container">
         <div class="form-container">
             <h2 class="form-header">Edit Ticket</h2>
-            <form action="#" th:action="@{/admin/edit/{id}(id=${ticket.id})}" th:object="${ticket}" method="post">
+            <form action="#" th:action="@{/admin/edit/{id}(id=${ticket.id})}" method="post">
                 <div class="mb-3">
-                    <label for="passengerName" class="form-label">Passenger Name:</label>
-                    <input type="text" class="form-control" id="passengerName" th:field="*{passengerName}" required>
+                    <label for="userId" class="form-label">Usuario:</label>
+                    <select class="form-control" id="userId" name="userId" required>
+                        <option th:each="user : ${users}" 
+                                th:value="${user.id}" 
+                                th:text="${user.name + ' (' + user.dni + ')'}"
+                                th:selected="${ticket.user != null and user.id == ticket.user.id}"></option>
+                    </select>
                 </div>
                 <div class="mb-3">
-                    <label for="dni" class="form-label">DNI:</label>
-                    <input type="text" class="form-control" id="dni" th:field="*{dni}" required>
+                    <label for="fromDestinationId" class="form-label">Origen:</label>
+                    <select class="form-control" id="fromDestinationId" name="fromDestinationId" required>
+                        <option th:each="destination : ${destinations}" 
+                                th:value="${destination.id}" 
+                                th:text="${destination.name}"
+                                th:selected="${ticket.fromDestination != null and destination.id == ticket.fromDestination.id}"></option>
+                    </select>
                 </div>
                 <div class="mb-3">
-                    <label for="fromLocation" class="form-label">From:</label>
-                    <input type="text" class="form-control" id="fromLocation" th:field="*{fromLocation}" required>
+                    <label for="toDestinationId" class="form-label">Destino:</label>
+                    <select class="form-control" id="toDestinationId" name="toDestinationId" required>
+                        <option th:each="destination : ${destinations}" 
+                                th:value="${destination.id}" 
+                                th:text="${destination.name}"
+                                th:selected="${ticket.toDestination != null and destination.id == ticket.toDestination.id}"></option>
+                    </select>
                 </div>
                 <div class="mb-3">
-                    <label for="toLocation" class="form-label">To:</label>
-                    <input type="text" class="form-control" id="toLocation" th:field="*{toLocation}" required>
+                    <label for="travelDate" class="form-label">Fecha:</label>
+                    <input type="date" class="form-control" id="travelDate" name="travelDate" th:value="${ticket.travelDate}" required>
                 </div>
                 <div class="mb-3">
-                    <label for="travelDate" class="form-label">Date:</label>
-                    <input type="date" class="form-control" id="travelDate" th:field="*{travelDate}" required>
+                    <label for="travelTime" class="form-label">Hora:</label>
+                    <input type="text" class="form-control" id="travelTime" name="travelTime" th:value="${ticket.travelTime}" required>
                 </div>
                 <div class="mb-3">
-                    <label for="travelTime" class="form-label">Time:</label>
-                    <input type="text" class="form-control" id="travelTime" th:field="*{travelTime}" required>
+                    <label for="seatNumber" class="form-label">Asiento:</label>
+                    <input type="text" class="form-control" id="seatNumber" name="seatNumber" th:value="${ticket.seatNumber}" required>
                 </div>
                 <div class="mb-3">
-                    <label for="seatNumber" class="form-label">Seat:</label>
-                    <input type="text" class="form-control" id="seatNumber" th:field="*{seatNumber}" required>
-                </div>
-                <div class="mb-3">
-                    <label for="price" class="form-label">Price:</label>
-                    <input type="number" class="form-control" id="price" th:field="*{price}" required>
+                    <label for="price" class="form-label">Precio:</label>
+                    <input type="number" step="0.01" class="form-control" id="price" name="price" th:value="${ticket.price}" required>
                 </div>
                 <div class="text-center d-flex">
                     <a href="/admin" class="btn btn-outline-custom w-100">Cancel</a>

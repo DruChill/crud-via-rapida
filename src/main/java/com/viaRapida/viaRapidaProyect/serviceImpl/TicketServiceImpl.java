@@ -49,6 +49,9 @@ public class TicketServiceImpl implements TicketService {
         Destination toDestination = destinationRepository.findById(request.getToDestinationId())
                 .orElseThrow(() -> new RuntimeException("Destino destino no encontrado"));
         
+        // Calcular precio automáticamente basado en los destinos
+        double calculatedPrice = calculatePriceByDestinations(fromDestination, toDestination);
+        
         // Crear ticket
         Ticket ticket = new Ticket();
         ticket.setUser(user);
@@ -57,9 +60,15 @@ public class TicketServiceImpl implements TicketService {
         ticket.setTravelDate(request.getTravelDate());
         ticket.setTravelTime(request.getTravelTime());
         ticket.setSeatNumber(request.getSeatNumber());
-        ticket.setPrice(request.getPrice());
+        ticket.setPrice(calculatedPrice); // Usar precio calculado
         
         return ticketRepository.save(ticket);
+    }
+    
+    // Método para calcular precio basado en destinos
+    private double calculatePriceByDestinations(Destination from, Destination to) {
+        // Lógica simple: suma de los precios base dividido entre 2 + 5 soles
+        return ((from.getPrice() + to.getPrice()) / 2) + 5.0;
     }
  
     @Override

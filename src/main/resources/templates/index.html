@@ -62,17 +62,17 @@
                 <!-- paso 1 destino -->
                 <div class="step active">
                     <p>Destino</p>
-                    <select id="fromLocation" name="fromLocation" required>
+                    <select id="fromDestinationId" name="fromDestinationId" required>
                         <option value="" disabled selected>Seleccione un lugar de origen</option>
                         <th:block th:each="destination : ${listDestinations}">
-                            <option th:value="${destination.name}" th:text="${destination.name}"></option>
+                            <option th:value="${destination.id}" th:text="${destination.name}"></option>
                         </th:block>
                     </select>
         
-                    <select id="toLocation" name="toLocation" required>
+                    <select id="toDestinationId" name="toDestinationId" required>
                         <option value="" disabled selected>Seleccione un lugar de destino</option>
                         <th:block th:each="destination : ${listDestinations}">
-                            <option th:value="${destination.name}" th:text="${destination.name}"></option>
+                            <option th:value="${destination.id}" th:text="${destination.name}"></option>
                         </th:block>
                     </select>
                     <div class="step-buttons">
@@ -124,22 +124,29 @@
                 <!-- paso 5 datos del pasajero -->
                 <div class="step">
                     <p>Datos del pasajero:</p>
-                    <input type="text" id="passengerName" name="passengerName" placeholder="Nombre del Pasajero:" pattern="[A-Za-z\s]+" required title="Solo se permiten letras">
+                    <input type="text" id="name" name="name" placeholder="Nombre del Pasajero:" pattern="[A-Za-z\s]+" required title="Solo se permiten letras">
         
                     <input pattern="\d{8}" maxlength="8" type="text" id="dni" name="dni" placeholder="Ingrese su DNI" inputmode="numeric" required title="Solo se permiten números y deben ser de 8 dígitos">
+                    
+                    <input type="email" id="email" name="email" placeholder="Email (opcional)">
+                    
+                    <input type="tel" id="phone" name="phone" placeholder="Teléfono (opcional)" pattern="\d{9}" maxlength="9">
+                    
                     <div class="step-buttons">
                         <button type="button" onclick="prevStep()">Regresar</button>
                         <button type="button" onclick="nextStep()">Siguiente</button>
                     </div>
                 </div>
         
-                <!-- paso 6 pago -->
+                <!-- paso 6 pago (simulado para proyecto escolar) -->
                 <div class="step">
+                    <p>📝 Nota: Este es un proyecto educativo - Los datos de pago son simulados</p>
                     <div class="payment">
-                        <label for="paymentMethod">Método de Pago:</label>
-                        <input type="text" id="cardnumber" name="cardnumber" pattern="\d{16}" maxlength="16" placeholder="Número de tarjeta:" required>
-                        <input type="text" id="cvv" name="cvv" pattern="\d{3}" maxlength="3" placeholder="CVV" required>
-                        <input type="text" id="expiry" name="expiry" pattern="\d{2}/\d{2}" maxlength="5" placeholder="MM/AA" required>
+                        <label for="paymentMethod">Método de Pago (Simulado):</label>
+                        <input type="text" id="cardnumber" name="cardnumber" pattern="\d{16}" maxlength="16" placeholder="Número de tarjeta: 1234567812345678" value="1234567812345678">
+                        <input type="text" id="cvv" name="cvv" pattern="\d{3}" maxlength="3" placeholder="CVV: 123" value="123">
+                        <input type="text" id="expiry" name="expiry" pattern="\d{2}/\d{2}" maxlength="5" placeholder="MM/AA: 12/25" value="12/25">
+                        <small class="text-muted">* Los datos de pago no se procesan realmente</small>
                     </div>
                     <div class="step-buttons">
                         <button type="button" onclick="prevStep()">Regresar</button>

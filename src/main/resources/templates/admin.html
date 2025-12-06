@@ -107,10 +107,10 @@
             <tbody>
                 <tr th:each="ticket : ${tickets}">
                     <td th:text="${ticket.id}"></td>
-                    <td th:text="${ticket.passengerName}"></td>
-                    <td th:text="${ticket.dni}"></td>
-                    <td th:text="${ticket.fromLocation}"></td>
-                    <td th:text="${ticket.toLocation}"></td>
+                    <td th:text="${ticket.user != null ? ticket.user.name : 'N/A'}"></td>
+                    <td th:text="${ticket.user != null ? ticket.user.dni : 'N/A'}"></td>
+                    <td th:text="${ticket.fromDestination != null ? ticket.fromDestination.name : 'N/A'}"></td>
+                    <td th:text="${ticket.toDestination != null ? ticket.toDestination.name : 'N/A'}"></td>
                     <td th:text="${ticket.travelDate}"></td>
                     <td th:text="${ticket.travelTime}"></td>
                     <td th:text="${ticket.seatNumber}"></td>

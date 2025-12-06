@@ -73,14 +73,14 @@
     <div class="container">
         <div class="form-container">
             <h2 class="form-header">Confirmación de Compra</h2>
-            <p>Nombre del Pasajero: <span id="passengerName" th:text="${ticket.passengerName}"></span></p>
-            <p>DNI: <span id="dni" th:text="${ticket.dni}"></span></p>
-            <p>De: <span id="fromLocation" th:text="${ticket.fromLocation}"></span></p>
-            <p>A: <span id="toLocation" th:text="${ticket.toLocation}"></span></p>
+            <p>Nombre del Pasajero: <span id="passengerName" th:text="${ticket.user != null ? ticket.user.name : 'N/A'}"></span></p>
+            <p>DNI: <span id="dni" th:text="${ticket.user != null ? ticket.user.dni : 'N/A'}"></span></p>
+            <p>De: <span id="fromLocation" th:text="${ticket.fromDestination != null ? ticket.fromDestination.name : 'N/A'}"></span></p>
+            <p>A: <span id="toLocation" th:text="${ticket.toDestination != null ? ticket.toDestination.name : 'N/A'}"></span></p>
             <p>Fecha: <span id="travelDate" th:text="${ticket.travelDate}"></span></p>
             <p>Hora: <span id="travelTime" th:text="${ticket.travelTime}"></span></p>
             <p>Asiento: <span id="seatNumber" th:text="${ticket.seatNumber}"></span></p>
-            <p>Precio: <span id="price" th:text="${ticket.price}"></span></p>
+            <p>Precio: S/. <span id="price" th:text="${ticket.price}"></span></p>
             <img src="https://png.pngtree.com/png-clipart/20220604/original/pngtree-barcode-with-fourteen-number-in-black-color-png-image_7947267.png" alt="code-bar" style="margin-left: 5rem;" width="60%">
             <div class="text-center">
                 <a href="/" class="btn btn-custom w-100">Volver a comprar otro boleto</a>
