@@ -1,5 +1,6 @@
 package com.viaRapida.viaRapidaProyect.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,7 @@ public class User {
     private String phone;
     
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Ticket> tickets = new ArrayList<>();
 
     // Constructors

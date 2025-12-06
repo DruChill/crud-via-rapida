@@ -1,5 +1,6 @@
 package com.viaRapida.viaRapidaProyect.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 
@@ -11,6 +12,7 @@ public class Ticket {
     
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonBackReference
     private User user;
     
     @ManyToOne
