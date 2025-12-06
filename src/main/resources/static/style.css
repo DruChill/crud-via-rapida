@@ -86,24 +86,40 @@ header nav ul li a {
     font-size: 2rem;
 }
 
+#travelTimeButtons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 20px 0;
+}
+
 .time-button {
-    padding: 10px;
-    border: none;
+    padding: 15px 30px;
+    margin: 5px;
+    border: 2px solid #ddd;
+    background-color: #fff;
     color: #333333;
     cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
 }
 
 .time-button:hover {
-    background-color: var(--secondary-color);
-    color: var(--primary-color); 
+    background-color: #f0f0f0;
+    border-color: var(--secondary-color);
+    transform: translateY(-2px);
 }
 
 .time-button-select {
     background-color: var(--secondary-color);
-    color: var(--primary-color); 
+    color: #fff;
+    border-color: var(--secondary-color);
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(236, 68, 30, 0.3);
 }
 
 

@@ -94,17 +94,19 @@
                 <!-- paso 3 hora -->
                 <div class="step">
                     <p>Seleccione la hora</p>
-                    <div id="travelTime" name="travelTime">
+                    <div id="travelTimeButtons">
                         <button type="button" class="time-button" data-time="05:00">5AM</button>
+                        <button type="button" class="time-button" data-time="08:00">8AM</button>
                         <button type="button" class="time-button" data-time="12:00">12PM</button>
                         <button type="button" class="time-button" data-time="16:00">4PM</button>
                     </div>
+                    <input type="hidden" id="travelTimeInput" name="travelTime" required>
+                    <small id="timeError" style="color: red; display: none;">Por favor seleccione una hora</small>
                     <div class="step-buttons">
                         <button type="button" onclick="prevStep()">Regresar</button>
-                        <button type="button" onclick="nextStep()">Siguiente</button>
+                        <button type="button" onclick="validateTimeAndNext()">Siguiente</button>
                     </div>
                 </div>
-                <input type="hidden" id="travelTimeInput" name="travelTime" required>
         
                 <!-- paso 4 asientos -->
                 <div class="step">
@@ -318,6 +320,45 @@
             currentStep--;
             showStep(currentStep);
         }
+    }
+    
+    // Manejar la selección de hora
+    document.addEventListener('DOMContentLoaded', function() {
+        const timeButtons = document.querySelectorAll('.time-button');
+        const travelTimeInput = document.getElementById('travelTimeInput');
+        const timeError = document.getElementById('timeError');
+        
+        timeButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Remover selección de todos los botones
+                timeButtons.forEach(btn => btn.classList.remove('time-button-select'));
+                
+                // Agregar selección al botón clickeado
+                this.classList.add('time-button-select');
+                
+                // Guardar el valor en el input oculto
+                const selectedTime = this.getAttribute('data-time');
+                travelTimeInput.value = selectedTime;
+                
+                // Ocultar mensaje de error
+                timeError.style.display = 'none';
+                
+                console.log('Hora seleccionada:', selectedTime);
+            });
+        });
+    });
+    
+    // Validar que se haya seleccionado una hora antes de continuar
+    function validateTimeAndNext() {
+        const travelTimeInput = document.getElementById('travelTimeInput');
+        const timeError = document.getElementById('timeError');
+        
+        if (!travelTimeInput.value) {
+            timeError.style.display = 'block';
+            return false;
+        }
+        
+        nextStep();
     }
 </script>
 <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
